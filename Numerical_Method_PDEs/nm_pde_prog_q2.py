@@ -16,7 +16,7 @@ pi=3.14159265358979323846
 # definition de la vitesse fonction de x: a(x)=celerite(x)
 def celerite(x):
     pi=3.14159265358979323846
-    return  x #np.sin(pi*x)
+    return -np.abs(x) ** 0.5
 
 
 

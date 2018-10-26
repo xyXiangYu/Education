@@ -1,0 +1,6 @@
+Data_Visulization  Assignment 1: 
+Using Python 3.6 and the Jupyter notebook, show the map in a nice way.
+Show all the birds positions from AllBirdsv4.csv over the map
+Improve the map to be more readable
+Show the 15 positions of the birds from Kasios
+

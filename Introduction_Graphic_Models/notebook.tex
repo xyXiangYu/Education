@@ -1,0 +1,1384 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PGM\_TP1\_Xiang\_Yu}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction to Probabilistic Graphical
+Models}\label{introduction-to-probabilistic-graphical-models}
+
+\subsection{Practical Session 1}\label{practical-session-1}
+
+\subsubsection{Author: Xiang Yu, Email:
+shawnxiangyu@yahoo.com}\label{author-xiang-yu-email-shawnxiangyuyahoo.com}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{norm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{networkx} \PY{k}{as} \PY{n+nn}{nx}
+        \PY{k+kn}{import} \PY{n+nn}{pyparsing}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Math}
+        \PY{k+kn}{import} \PY{n+nn}{copy}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Question 0}\label{question-0}
+
+    We often need to compute\\
+\[
+s= log\sum_{i=1}^I \exp(v_i)
+\] where each \(v_i < 0\) and \(|v_i|\) is very large. The direct
+calculation of \(s\) may not be numerically stable. Therefore, we
+propose the calculation as the following: \[
+  V_{max} = \max_{i} v_i 
+\] Then,
+
+\begin{align}
+s &= log\sum_{i=1}^I \exp(v_i) \\
+ & = log\sum_{i=1}^I \exp(v_i- V_{max} + V_{max}) \\
+ & = log\sum_{i=1}^I \exp(v_i- V_{max}) * exp(V_{max}) \\
+ & = V_{max} + log\sum_{i=1}^I \exp(v_i- V_{max})
+\end{align}
+
+We define function L for later calculation \[
+L(v_i) =  V_{max} + log\sum_{i=1}^I \exp(v_i- V_{max})
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}Q0}
+        \PY{k}{def} \PY{n+nf}{naive\PYZus{}logsum\PYZus{}exp}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{p}{:}     
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{p}{:} 
+            \PY{n}{max\PYZus{}xs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{xs}\PY{p}{)}
+            \PY{n}{nr\PYZus{}xs} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xs}\PY{p}{)}
+            \PY{n}{vi\PYZus{}vmax} \PY{o}{=} \PY{n}{xs} \PY{o}{\PYZhy{}} \PY{n}{max\PYZus{}xs}   
+            \PY{k}{return} \PY{n}{max\PYZus{}xs} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{vi\PYZus{}vmax}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} calculate the result for q0:}
+        \PY{n}{xs} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1234}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1235}\PY{p}{]}
+        \PY{n}{naive\PYZus{}s} \PY{o}{=} \PY{n}{naive\PYZus{}logsum\PYZus{}exp}\PY{p}{(}\PY{n}{xs}\PY{p}{)} 
+        \PY{n}{stable\PYZus{}s} \PY{o}{=} \PY{n}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{xs}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naivie and stable solution are: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{naive\PYZus{}s}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stable\PYZus{}s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Naivie and stable solution are:  -inf , -1233.6867383124818
+
+    \end{Verbatim}
+
+    \subsubsection{Q0: Explain why it should
+work:}\label{q0-explain-why-it-should-work}
+
+When \(v_i < 0\) and \(|v_i|\) is very large, \(\exp(v_i)\) will be
+extremly small and could easily be over the machine precision, the
+machine may think then the returned value will be zero, and \(log(0)\)
+will return infinity.
+
+With the stable method, \(v_i- V_{max}\) will always be smaller or equal
+to zero and one element of \(v_i- V_{max}\) will be zero, leading to
+\(log\sum_{i=1}^I \exp(v_i- V_{max})\) strictly positive, and when
+plusing a constant \(V_{max}\), the result will be numerically stable.
+
+    \subsubsection{Q1}\label{q1}
+
+    \paragraph{Q1.1}\label{q1.1}
+
+The position domain will be \(PD = \{1, 2, ..., N\}\). The action domain
+will be \(AD = \{0, 1\}\), here \(0\) means the robot stays where it is
+and \(1\) means the robot moves to the next point in the counter-clock
+direction. The variables are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \(x_k\), the actual position at each step, where \(x_k \in PD\)
+\item
+  \(y_k\), the observed position at each step, where \(y_k \in PD\)
+\item
+  \(a_k\), the action taken at each step, where \(a_k \in AD\)
+\end{itemize}
+
+The generative model is as follows:
+
+\[\large p(x_{1:k} , y_{1:k}) = \{\pi_{i=2}^{k}p(y_i|x_i)p(x_i|x_{i-1})\}p(x_1)p(y_1|x_1)\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} draw the accociated directed graphical model}
+        \PY{c+c1}{\PYZsh{} This section code coming from : https://github.com/atcemgil/notes/blob/master/HiddenMarkovModel.ipynb}
+        \PY{k}{def} \PY{n+nf}{makeDBN}\PY{p}{(}\PY{n}{inter}\PY{p}{,} \PY{n}{intra}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Unfold a graph for T time slices\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{N} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{j} \PY{o+ow}{in} \PY{n}{inter}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n+nb}{max}\PY{p}{(}\PY{p}{[}\PY{n}{j} \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{j} \PY{o+ow}{in} \PY{n}{inter}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+        
+            \PY{n}{G} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{o}{*}\PY{n}{T}\PY{p}{,}\PY{n}{N}\PY{o}{*}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+            \PY{n}{pos} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{all\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                \PY{n}{pos}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+                \PY{n}{all\PYZus{}labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{labels}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{l+m+mi}{0}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+            \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{inter}\PY{p}{:}
+                \PY{n}{s}\PY{p}{,}\PY{n}{d} \PY{o}{=} \PY{n}{e}
+                \PY{n}{G}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{d}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        
+            \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{T}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{pos}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{all\PYZus{}labels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{labels}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{inter}\PY{p}{:}
+                    \PY{n}{s}\PY{p}{,}\PY{n}{d} \PY{o}{=} \PY{n}{e}
+                    \PY{n}{s} \PY{o}{=} \PY{n}{s} \PY{o}{+} \PY{n}{N}\PY{o}{*}\PY{n}{t}
+                    \PY{n}{d} \PY{o}{=} \PY{n}{d} \PY{o}{+} \PY{n}{N}\PY{o}{*}\PY{n}{t}
+                    \PY{n}{G}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{d}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{intra}\PY{p}{:}
+                    \PY{n}{s}\PY{p}{,}\PY{n}{d} \PY{o}{=} \PY{n}{e}
+                    \PY{n}{s} \PY{o}{=} \PY{n}{s} \PY{o}{+} \PY{n}{N}\PY{o}{*}\PY{p}{(}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{d} \PY{o}{=} \PY{n}{d} \PY{o}{+} \PY{n}{N}\PY{o}{*}\PY{n}{t}
+                    \PY{n}{G}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{d}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{G}\PY{p}{,}\PY{n}{pos}\PY{p}{,}\PY{n}{all\PYZus{}labels}
+        
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{suppress}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{inter} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{intra} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+        \PY{n}{variable\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} 
+        \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{A}\PY{p}{,} \PY{n}{pos}\PY{p}{,} \PY{n}{label\PYZus{}list} \PY{o}{=} \PY{n}{makeDBN}\PY{p}{(}\PY{n}{inter}\PY{p}{,} \PY{n}{intra}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{variable\PYZus{}names}\PY{p}{)}
+        
+        \PY{n}{G} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{DiGraph}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+        \PY{n}{labels} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{i}\PY{p}{:} \PY{n}{s} \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{label\PYZus{}list}\PY{p}{)}\PY{p}{\PYZcb{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mf}{2.5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{nx}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{n}{pos}\PY{p}{,} \PY{n}{node\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{node\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2500}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} \PY{n}{font\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{24}\PY{p}{,} \PY{n}{arrows}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Directed Graphical model with \PYZdl{}x\PYZus{}i\PYZdl{} the actual position, \PYZdl{}y\PYZus{}i\PYZdl{} the observed position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Q1.2}\label{q1.2}
+
+The transition model is: \(x_k \sim p(x_k | x_{k-1})\) and the
+observation model is: \(y_k \sim p(y_k | x_k)\).
+
+\[
+p(x_1 = i) = \frac{1}{N} \\
+p(y_1 = i | x_1 = i) = w  + \frac{1}{N} *(1-w)\\ 
+p(y_1 = i  | x_1 = j) = \frac{1}{N} *(1-w), where \ i \neq j\\
+p(x_2 = i | x_1 = i) = \epsilon \\
+p(x_2 = j | x_1 = i) = 1 - \epsilon \\
+\]
+
+Where \(j = mod(i - 1 + N, N)\),i.e. a counter-clock direction position
+next to \(i\)\\
+\[
+p(x_2 = k | x_1 = i) = 0
+\] where \$k \neq i \$ and \$ k \neq j \$, with \(j\) the same
+definition as above. \[
+p(y_2 = i | x_k = i) =  w + \frac{1-w}{N} \\
+...
+\]
+
+\[
+p(x_k = i | x_{k-1} = i) = \epsilon \\
+p(x_k = j | x_{k-1} = i) = 1 - \epsilon, j \ counter-clock \  position \ next\  to \  i\\
+p(x_k = k | x_{k-1} = i) = 0, k \neq i \ and \  k \neq j \\
+p(y_k = i | x_k = i) = w + \frac{1-w}{N} \\
+p(y_k = i  | x_k = j) = \frac{1}{N} *(1-w), where \ i \neq j
+\]
+
+    The transition model written in a matrix form, with
+\(j = mod(i - 1 + N, N)\), i.e. a counter-clock direction position next
+to \(i\) ; when i = 1, j will be equal to N:
+\[p(x_{k+1}|x_k=i)= \begin{pmatrix}
+ 0   \\
+...  \\
+1 - \epsilon  \\
+\epsilon  \\
+...  \\
+0 
+\end{pmatrix}, \ with\ \  each\  row \  corresponding\ to \ x_{k+1} = \  
+\begin{pmatrix}
+ 1   \\
+...  \\
+j \\
+i  \\
+...  \\
+N 
+\end{pmatrix}  \]
+
+    The observation model in matrix form: \[p(y_{k}|x_k=i)= \begin{pmatrix}
+ \frac{1-w}{N}    \\
+...  \\
+ \frac{1-w}{N}  \\
+w +  \frac{1-w}{N}  \\
+ \frac{1-w}{N}  \\
+...  \\
+ \frac{1-w}{N} 
+\end{pmatrix}, \ with\ \  each\  row \  corresponding\ to \ y_{k} = \  
+\begin{pmatrix}
+ 1   \\
+...  \\
+i-1 \\
+i  \\
+i+1 \\
+...  \\
+N 
+\end{pmatrix}  \]
+
+    \paragraph{Q1.3}\label{q1.3}
+
+We define: \[
+\large p(x_k, y_{1:k}) =  \alpha_{k|k}(x_k) \\
+\large p(x_k, y_{1:k-1}) = \alpha_{k|k-1}(x_k) \\
+\large p(y_{k:N}|x_k) = \beta_{k|k}(x_k) \\
+\large p(y_{k+1:N}|x_k) = \beta_{k|k+1}(x_k) \\
+\large \beta_{N|N+1}(x_N) = 1
+\] Where \(N\) is the total number of time steps
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Distribution of the robot's current position given the observations so
+  far, i.e. the filtering distribution:
+\end{enumerate}
+
+\[\large p(x_k | y_{1:k}) = \frac{p(x_k,  y_{1:k})}{p(y_{1:k})} = \frac{\alpha_{k|k}(x_k)}{\sum_{x_k}p(x_k, y_{1:k})} = \frac{\alpha_{k|k}(x_k)}{\sum_{x_k}\alpha_{k|k}(x_k)}\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Distribution of the robot's position at time step k given all the
+  observations, i.e. the smoothing distribution:
+  \(\large p(x_k | y_{1:N})\).
+\end{enumerate}
+
+we have \[\large
+\begin{align*}
+p(x_k , y_{1:N}) &= p(x_k, y_{1:k}, y_{k+1:N}) = p(x_k, y_{1:k}) p(y_{k+1:N}|x_k, y_{1:k}) \\
+   &= p(x_k, y_{1:k}) p(y_{k+1:K}|x_k) =  \alpha_{k|k}(x_k)  \beta_{k|k+1}(x_k) 
+\end{align*}
+\] Then,
+
+\[\large
+\begin{align*}
+p(x_k | y_{1:N}) &= \frac{p(x_k , y_{1:N})}{p(y_{1:N})} =  \frac{\alpha_{k|k}(x_k)\beta_{k|k+1}(x_k)}{\sum_{x_N}p(y_{1:N}, X_N)} \\
+& = \frac{\alpha_{k|k}(x_k)\beta_{k|k+1}(x_k)}{\sum_{x_N}\alpha_{N|N}(x_N)} 
+\end{align*}
+\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Distribution of the robot's next position given the observations so
+  far, i.e. predictive distribution \(p(x_{k+1}|y_{1:k})\), where we
+  know \(y_{1:k}\)
+\end{enumerate}
+
+\[\large
+\begin{align*}
+p(x_{k+1}|y_{1:k}) &= \frac{p(x_{k+1},y_{1:k})}{p(y_{1:k})} = \frac{\alpha_{k+1|k}(x_{k+1})}{\sum_{x_k}\alpha_{k|k}(x_k)} 
+\end{align*}
+\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Distribution of the robot's next sensor reading given the observations
+  so far
+\end{enumerate}
+
+\[
+\large p(y_{k+1}|y_{1:k}) = \frac{p(y_{k+1},y_{1:k})}{p(y_{1:k})}
+\] Where \[\large
+\begin{align*}
+p(y_{k+1},y_{1:k}) &= p(y_{1:k+1}) \\
+    &= \sum_{x_1, x_2, \ ...,\ x_{k+1}} p(y_{1:k+1}, x_{1:k+1}) \\
+    &= \sum_{x_1, x_2, \ ...,\ x_{k+1}}p(x_1)p(y_1|x_1)\pi_{n=2}^{k+1}p(x_n|x_{n-1})p(y_n|x_n) \\
+    &= \sum_{x_1, x_2, \ ...,\ x_{k+1}}p(y_{k+1}|x_{k+1})p(x_{k+1}|x_{k})  ...p(y_{2}|x_{2})p(x_2|x_{1})p(y_{1}|x_{1})p(x_{1}) \\
+    &= \sum_{x_{k+1}}p(y_{k+1}|x_{k+1})\sum_{x_k}p(x_{k+1}|x_{k})p(y_k|x_k)...  \sum_{x_2}p(x_{3}|x_{2})p(y_2|x_2)\sum_{x_1}p(x_{2}|x_{1})p(y_1|x_1)p(x_1)  \\
+   &=\underbrace{\sum_{x_{k+1}} p(y_{k+1} | x_{k+1} ) \sum_{x_{k}} p(x_{k+1}|x_{k})  \dots \sum_{x_{2}} p(x_3|x_{2})
+\underbrace{ p(y_{2}|x_{2}) \overbrace{ \sum_{x_{1}} p(x_2|x_{1})
+\underbrace{ p(y_{1}|x_{1}) \overbrace{ p(x_1)}^{\alpha_{1|0}}}_{\alpha_{1|1}}
+}^{\alpha_{2|1}} }_{\alpha_{2|2}}}_{\alpha_{k+1|k+1}} 
+\end{align*}
+\]
+
+and \[
+\large p(y_{1:k}) = \sum_{x_k}\alpha_{k|k}(x_k)
+\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Distribution of the robot's initial position given observations so far
+\end{enumerate}
+
+\[\large
+\begin{align*}
+p(x_1|y_{1:k}) &= \frac{p(y_{1:k}|x_1)p(x_1)}{p(y_{1:k})} = \frac{p(y_1|x_1)p(y_{2:k}|x_1)p(x_1)}{p(y_{1:k})}\\
+\end{align*}
+\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Most likely current position of the robot given the observations so
+  far from (a), we have:
+\end{enumerate}
+
+\[\large p(x_k | y_{1:k}) = \frac{p(x_k,  y_{1:k})}{p(y_{1:k})} = \frac{\alpha_{k|k}(x_k)}{\sum_{x_k}p(x_k, y_{1:k})} = \frac{\alpha_{k|k}(x_k)}{\sum_{x_k}\alpha_{k|k}(x_k)}\]
+
+Then, most likely current position will be: \[\large
+\begin{align*}
+x_k^* = arg \max_{x_k}p(x_k|y_{1:k}) = arg \max_{x_k}\frac{\alpha_{k|k}(x_k)}{\sum_{x_k}\alpha_{k|k}(x_k)}
+\end{align*}
+\]
+
+    \begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Most likely trajectory taken by the robot from the start until now
+  given the observations so far
+\end{enumerate}
+
+\[\large
+\begin{align*}
+x_{1:k}^* &= arg \max_{x_{1:k}}p(x_{1:k}|y_{1:k}) \\
+&= arg \max_{x_{1:k}} \underbrace{ p(x_{1}|x_{2:k}, y_{1:k}) \cdots p(x_{k-2}|x_{k-1:k}, y_{1:k}) p(x_{k-1}|x_k, y_{1:k}) p(x_{k}|y_{1:k})}_{By\  conditional\  independence} \\
+& = arg \max_{x_{1:k}} p(x_{1}|x_{2}, y_{1}) \cdots p(x_{k-2}|x_{k-1}, y_{1:k-2}) p(x_{k-1}|x_k, y_{1:k-1}) p(x_{k}|y_{1:k}) 
+\end{align*}
+\]
+
+    \paragraph{Q1.4}\label{q1.4}
+
+Implement a program that simulates this scenario; i.e., generates
+realizations from the movements of the robot and the associated sensor
+readings. Simulate a scenario for k = 1, . . . , 100 with N = 50,  =
+0.3, w = 0.8
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Q1.4 \PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{Math}\PY{p}{,} \PY{n}{Latex}
+        \PY{n}{randint} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}
+        
+        \PY{n}{nr\PYZus{}sc} \PY{o}{=} \PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{} number of scenarios}
+        \PY{n}{nr\PYZus{}ts} \PY{o}{=} \PY{l+m+mi}{120}  \PY{c+c1}{\PYZsh{} number of time steps}
+        \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{50}      \PY{c+c1}{\PYZsh{} number of states, i.e. all possible positions}
+        
+        \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.3}
+        \PY{n}{w} \PY{o}{=} \PY{l+m+mf}{0.8}
+        
+        \PY{n}{xs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nr\PYZus{}sc}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+        \PY{n}{ys} \PY{o}{=} \PY{n}{xs}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}ys = np.zeros((nr\PYZus{}sc, N), dtype=int)}
+        \PY{n}{obs\PYZus{}model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{)}
+        \PY{n}{tran\PYZus{}model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} column : x\PYZus{}i value, row x\PYZus{}\PYZob{}i+1\PYZcb{} value}
+        
+        \PY{c+c1}{\PYZsh{} probility vecotor of the position of x1, x1 correponding to zero index in the matched matrix or vector}
+        \PY{n}{x1\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{N} 
+        \PY{n}{obs\PYZus{}model} \PY{o}{=} \PY{n}{obs\PYZus{}model} \PY{o}{*} \PY{p}{(}\PY{l+m+mf}{1.} \PY{o}{\PYZhy{}} \PY{n}{w}\PY{p}{)} \PY{o}{/} \PY{n}{N}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:} 
+            \PY{n}{j} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mod}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{N}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+            \PY{n}{obs\PYZus{}model}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{w} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{1.} \PY{o}{\PYZhy{}} \PY{n}{w}\PY{p}{)} \PY{o}{/} \PY{n}{N}
+            \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{epsilon}
+            \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{epsilon}
+        
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The initial position probablities vector: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x1\PYZus{}prob}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The transition model probablities matrix (column:}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}i, row x\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i+1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{): }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tran\PYZus{}model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The observatoray model probablities matrix (column: x\PYZus{}i, row y\PYZus{}i): }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{obs\PYZus{}model}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The initial position probablities vector: 
+ [[0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02
+  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02
+  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02
+  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02]] 
+
+The transition model probablities matrix (column:x\_i, row x\_\{i+1\}): 
+ [[0.3 0.7 0.  {\ldots} 0.  0.  0. ]
+ [0.  0.3 0.7 {\ldots} 0.  0.  0. ]
+ [0.  0.  0.3 {\ldots} 0.  0.  0. ]
+ {\ldots}
+ [0.  0.  0.  {\ldots} 0.3 0.7 0. ]
+ [0.  0.  0.  {\ldots} 0.  0.3 0.7]
+ [0.7 0.  0.  {\ldots} 0.  0.  0.3]] 
+
+The observatoray model probablities matrix (column: x\_i, row y\_i):  
+ [[0.804 0.004 0.004 {\ldots} 0.004 0.004 0.004]
+ [0.004 0.804 0.004 {\ldots} 0.004 0.004 0.004]
+ [0.004 0.004 0.804 {\ldots} 0.004 0.004 0.004]
+ {\ldots}
+ [0.004 0.004 0.004 {\ldots} 0.804 0.004 0.004]
+ [0.004 0.004 0.004 {\ldots} 0.004 0.804 0.004]
+ [0.004 0.004 0.004 {\ldots} 0.004 0.004 0.804]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}loc} \PY{p}{(}\PY{n}{prob}\PY{p}{,} \PY{n}{prob\PYZus{}distrbution}\PY{p}{)}\PY{p}{:} 
+            \PY{c+c1}{\PYZsh{} return the idx loction of prob in the prob\PYZus{}distrbution}
+            \PY{n}{nr\PYZus{}loc} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{prob\PYZus{}distrbution}\PY{p}{)}
+            \PY{n}{cum\PYZus{}sum} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{prob\PYZus{}distrbution}\PY{p}{)}  
+            \PY{n}{idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{prob} \PY{o}{\PYZlt{}} \PY{n}{cum\PYZus{}sum}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}  
+            \PY{k}{return} \PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        
+        \PY{c+c1}{\PYZsh{} simulator the trajectory }
+        \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:}   
+            \PY{k}{for} \PY{n}{si} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nr\PYZus{}sc}\PY{p}{)}\PY{p}{:} 
+                \PY{k}{if} \PY{n}{ti} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{c+c1}{\PYZsh{} the initial position is uniformly distributed among the N positions with 1/N probablity}
+                    \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{p}{)}      
+                \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} pi \PYZgt{} 0}
+                    \PY{n}{x\PYZus{}ti\PYZus{}prob} \PY{o}{=} \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+                    \PY{n}{rand\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}  
+                    \PY{n}{idx\PYZus{}loc} \PY{o}{=} \PY{n}{sample\PYZus{}loc}\PY{p}{(}\PY{n}{rand\PYZus{}prob}\PY{p}{,} \PY{n}{x\PYZus{}ti\PYZus{}prob}\PY{p}{)} 
+                    \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{idx\PYZus{}loc} 
+                \PY{n}{y\PYZus{}ti\PYZus{}prob} \PY{o}{=} \PY{n}{obs\PYZus{}model}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{]}
+                \PY{n}{rand\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}  
+                \PY{n}{idx\PYZus{}loc} \PY{o}{=} \PY{n}{sample\PYZus{}loc}\PY{p}{(}\PY{n}{rand\PYZus{}prob}\PY{p}{,} \PY{n}{y\PYZus{}ti\PYZus{}prob}\PY{p}{)} 
+                \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{idx\PYZus{}loc}
+                
+        \PY{n}{si} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{timesteps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nr\PYZus{}ts}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{observed position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{One simulated scenario of actual and observed position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}        
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Q1.5.}\label{q1.5.}
+
+Implement the Forward-Backward algorithm for computing the quantities
+defined in 3-a,b,f. (Attention: be careful with numerical stability!
+Modify the log-sum-exp trick for this algorithm)
+
+    \subsubsection{Some formula to be used:}\label{some-formula-to-be-used}
+
+This part code coming from :
+https://github.com/atcemgil/notes/blob/master/HiddenMarkovModel.ipynb
+
+\subsubsection{Forward Pass}\label{forward-pass}
+
+\begin{eqnarray}
+p(y_{1:K}) & = & \sum_{x_{1:K}} p(y_{1:K}|x_{1:K}) p(x_{1:K}) \\
+& = &  \underbrace{\sum_{x_K} p(y_K | x_K ) \sum_{x_{K-1}} p(x_K|x_{K-1})  \dots \sum_{x_{2}} p(x_3|x_{2})
+\underbrace{ p(y_{2}|x_{2}) \overbrace{ \sum_{x_{1}} p(x_2|x_{1})
+\underbrace{ p(y_{1}|x_{1}) \overbrace{ p(x_1)}^{\alpha_{1|0}}}_{\alpha_{1|1}}
+}^{\alpha_{2|1}} }_{\alpha_{2|2}}}_{\alpha_{K|K}}
+\end{eqnarray}
+
+\begin{eqnarray}
+\alpha_{1|0} & \equiv & p(x_1)
+\end{eqnarray}
+
+\begin{eqnarray}
+\alpha_{k|k} & \equiv & p(y_{1:k}, x_k)
+\end{eqnarray}
+
+\begin{eqnarray}
+\alpha_{k|k-1}  & \equiv & p(y_{1:k-1}, x_k)
+\end{eqnarray}
+
+For \(k=1, 2, \dots, K\)
+
+\textbf{Predict}
+
+\(k=1\):
+
+\begin{eqnarray}
+\alpha_{1|0}(x_1) = p(x_1)
+\end{eqnarray}
+
+\(k>1\):
+
+\begin{eqnarray}
+{\alpha_{k|k-1}(x_k)} & = & p(y_{1:k-1}, x_k) = \sum_{x_{k-1}} p(x_k| x_{k-1}) p(y_{1:k-1}, x_{k-1}) \\
+& = & \sum_{x_{k-1}} p(x_k| x_{k-1}) { \alpha_{k-1|k-1}(x_{k-1}) }
+\end{eqnarray}
+
+\textbf{Update}
+
+\begin{eqnarray}
+{\alpha_{k|k}(x_k) } & = & p(y_{1:k}, x_k) = p(y_k | x_k) p(y_{1:k-1}, x_k) \\
+ & = & p(y_k | x_k) {\alpha_{k|k-1}(x_k)}
+\end{eqnarray}
+
+\subsubsection{Backward Pass}\label{backward-pass}
+
+\begin{eqnarray}
+p(y_{1:K}) & = &  \sum_{x_1} p(x_1) p(y_1 | x_1 )
+%underbrace{\sum_{x_2} p(x_2|x_{1}) p(y_2 | x_2 )}_{\beta_1}
+\dots
+\underbrace{ \sum_{x_{K-1}} p(x_{K-1}|x_{K-2}) p(y_{K-1} | x_{K-1} )
+\underbrace{ \sum_{x_K} p(x_K|x_{K-1}) p(y_K | x_K )
+\underbrace{{\pmb 1}}_{\beta_{K|K+1}}}_{\beta_{K-1|K}}}_{\beta_{K-2|K-1}}
+\end{eqnarray}
+
+\begin{eqnarray}
+\beta_{k|k+1}(x_k) & \equiv & p(y_{k+1:K}| x_k) \\
+\beta_{k|k}(x_k) & \equiv & p(y_{k:K}| x_k)
+\end{eqnarray}
+
+For \(k=K, K-1, \dots, 1\)
+
+'Postdict' : (Backward Prediction)
+
+\(k=K\)
+
+\begin{eqnarray}
+\beta_{K|K+1}(x_K) & = & \mathbf{1} 
+\end{eqnarray}
+
+\(k<K\)
+
+\begin{eqnarray}
+\beta_{k|k+1}(x_k) & = & p(y_{k+1:K}| x_k) = \sum_{x_{k+1}} p(x_{k+1}| x_{k}) p(y_{k+1:K}| x_{k+1}) \\
+& = & \sum_{x_{k+1}} p(x_{k+1}| x_{k}) \beta_{k+1|k+1}(x_{k+1}) 
+\end{eqnarray}
+
+Update
+
+\begin{eqnarray}
+\beta_{k|k}(x_k)  & = & p(y_{k:K}| x_k) = p(y_k | x_k) p(y_{k+1:K}| x_k) \\
+ & = & p(y_k | x_k) {\beta_{k|k+1}(x_k)}
+\end{eqnarray}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Q1.5 formula:}
+        \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{tran\PYZus{}model}\PY{p}{,} \PY{n}{lp}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} STATE\PYZus{}PREDICT, compute tran\PYZus{}model * prob in the log domain}
+            
+            \PY{c+c1}{\PYZsh{} input }
+            \PY{c+c1}{\PYZsh{} tran\PYZus{}model: State transition matrix}
+            \PY{c+c1}{\PYZsh{} lp : log p(x\PYZus{}\PYZob{}k\PYZhy{}1\PYZcb{}, y\PYZus{}\PYZob{}1:k\PYZhy{}1\PYZcb{}) Filtered potential}
+            
+            \PY{c+c1}{\PYZsh{} output: }
+            \PY{c+c1}{\PYZsh{} lpp : log p(x\PYZus{}\PYZob{}k\PYZcb{}, y\PYZus{}\PYZob{}1:k\PYZhy{}1\PYZcb{}); Predicted potential}
+            
+            \PY{n}{lstar} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{lp}\PY{p}{)}
+            \PY{k}{return} \PY{n}{lstar} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{tran\PYZus{}model}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{lp}\PY{o}{\PYZhy{}}\PY{n}{lstar}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{postdict}\PY{p}{(}\PY{n}{tran\PYZus{}model}\PY{p}{,} \PY{n}{lp}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} input }
+            \PY{c+c1}{\PYZsh{} tran\PYZus{}model: State transition matrix}
+            \PY{c+c1}{\PYZsh{} lp : log p(x\PYZus{}\PYZob{}k\PYZhy{}1\PYZcb{}, y\PYZus{}\PYZob{}1:k\PYZhy{}1\PYZcb{}) Filtered potential}
+            
+            \PY{n}{lstar} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{lp}\PY{p}{)}
+            \PY{k}{return} \PY{n}{lstar} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{lp}\PY{o}{\PYZhy{}}\PY{n}{lstar}\PY{p}{)}\PY{p}{,} \PY{n}{tran\PYZus{}model}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{logobs}\PY{p}{,} \PY{n}{lp}\PY{p}{)}\PY{p}{:}  
+            \PY{c+c1}{\PYZsh{} Inputs :}
+            \PY{c+c1}{\PYZsh{} logobs : log(p(y\PYZus{}k| x\PYZus{}k))}
+            \PY{c+c1}{\PYZsh{} y  : the postion of y}
+            \PY{c+c1}{\PYZsh{} lp: log\PYZus{}p : log p(x\PYZus{}k, y\PYZus{}\PYZob{}1, k\PYZhy{}1\PYZcb{})}
+            
+            \PY{c+c1}{\PYZsh{} Outputs : }
+            \PY{c+c1}{\PYZsh{}     lup : log p(x\PYZus{}k, y\PYZus{}\PYZob{}1, k\PYZhy{}1\PYZcb{}) p(y\PYZus{}k| x\PYZus{}k)}
+              
+            \PY{k}{return} \PY{n}{logobs}\PY{p}{[}\PY{n}{y}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{lp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} Q1.5}
+         
+         \PY{c+c1}{\PYZsh{} Forward Pass}
+         \PY{n}{alpha\PYZus{}1\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{N}  \PY{c+c1}{\PYZsh{} alpha\PYZus{}1\PYZus{}0 = p(x\PYZus{}1)}
+         \PY{c+c1}{\PYZsh{} alpha\PYZus{}1\PYZus{}1 = obs\PYZus{}model.dot(alpha\PYZus{}1\PYZus{}0)  \PYZsh{} alpha\PYZus{}1\PYZus{}1 = p(y\PYZus{}1|x\PYZus{}1)p(x\PYZus{}1) = p(y\PYZus{}1|x\PYZus{}1) alpha\PYZus{}1\PYZus{}0}
+         
+         \PY{c+c1}{\PYZsh{} one scenario from the simulation}
+         \PY{n}{x} \PY{o}{=} \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{p} \PY{o}{=} \PY{n}{alpha\PYZus{}1\PYZus{}0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{trans} \PY{o}{=} \PY{n}{tran\PYZus{}model}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} transition model   p(x\PYZus{}k | x\PYZus{}\PYZob{}k\PYZus{}1\PYZcb{})}
+         \PY{n}{obs} \PY{o}{=} \PY{n}{obs\PYZus{}model}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}     \PY{c+c1}{\PYZsh{} observation model  p(y\PYZus{}k | x\PYZus{}k)}
+         
+         \PY{n}{log\PYZus{}trans} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{trans}\PY{p}{)}
+         \PY{n}{log\PYZus{}obs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{obs}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} N: number of states/positions}
+         \PY{c+c1}{\PYZsh{} nr\PYZus{}ts: number of time steps}
+         
+         \PY{c+c1}{\PYZsh{} Python indices start from zero so}
+         \PY{n}{log\PYZus{}alpha}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} log \PYZbs{}alpha\PYZus{}\PYZob{}k|k\PYZcb{} will be in log\PYZus{}alpha[:,k\PYZhy{}1]}
+         \PY{n}{log\PYZus{}alpha\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}   \PY{c+c1}{\PYZsh{} log \PYZbs{}alpha\PYZus{}\PYZob{}k|k\PYZhy{}1\PYZcb{} will be in log\PYZus{}alpha\PYZus{}pred[:,k\PYZhy{}1]}
+         
+         \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ti}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{trans}\PY{p}{,} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}        
+             
+             \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{ti}\PY{p}{]}\PY{p}{,} \PY{n}{log\PYZus{}obs}\PY{p}{,} \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{)}  
+             
+         
+         \PY{c+c1}{\PYZsh{} Backward Pass}
+         \PY{n}{log\PYZus{}beta}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} beta\PYZus{}k|k}
+         \PY{n}{log\PYZus{}beta\PYZus{}post} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} beta\PYZus{}k|k+1}
+         
+         
+         \PY{n}{backward\PYZus{}range} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{backward\PYZus{}range}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ti} \PY{o}{==} \PY{n}{nr\PYZus{}ts} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{postdict}\PY{p}{(}\PY{n}{trans}\PY{p}{,} \PY{n}{log\PYZus{}beta}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}beta}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{ti}\PY{p}{]}\PY{p}{,} \PY{n}{log\PYZus{}obs}\PY{p}{,} \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Q1.5 Compute (a) Distribution of the robot’s current position given the observations so far, i.e. the filtering distribution: }
+         \PY{c+c1}{\PYZsh{}  i.e. p(xk|y1:k),  with  y1:k given!!!}
+         
+         \PY{c+c1}{\PYZsh{} the p(xk|y1:k) value along all the time steps, given the observed position up to the corresponding time step}
+         \PY{n}{p\PYZus{}xk\PYZus{}y1k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1k} \PY{o}{=} \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{\PYZhy{}} \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}kk}
+             \PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}
+             
+         
+         \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We check whether the probablities summing up to 1 along the path!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} 
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ The sum of probablities at each time step }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} random choose a k }
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We print the probabilties of each position for a particular time step}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ given observed position up to time k,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}p(x\PYZus{}k|y\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1:k\PYZcb{})\PYZdl{} = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+We check whether the probablities summing up to 1 along the path! 
+ The sum of probablities at each time step 
+:  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+
+We print the probabilties of each position for a particular time step 
+ given observed position up to time k, \$p(x\_k|y\_\{1:k\})\$ =  
+ [0.      0.      0.      0.      0.      0.00004 0.6985  0.30083 0.00064
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.     ]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Q1.5(b) Distribution of the robot’s position at time step k given all the observations, i.e. the smoothing distribution: p(xk|y1:N)p(xk|y1:N). }
+         
+         \PY{c+c1}{\PYZsh{} the p(xk|y1:k) value along all the time steps, given the observation to the end}
+         \PY{n}{p\PYZus{}xk\PYZus{}y1N} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}beta\PYZus{}post\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}NN} \PY{o}{=} \PY{n}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1N} \PY{o}{=} \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{+}  \PY{n}{log\PYZus{}beta\PYZus{}post\PYZus{}kk}  \PY{o}{\PYZhy{}}  \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}NN}
+             \PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1N}\PY{p}{)}
+             
+         
+         \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We check whether the probablities summing up to 1 along the path!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} 
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ The sum of probablities at each time step }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} random choose a k }
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We print the probabilties of each position for a particular time step, given all observed position!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}p(x\PYZus{}k|y\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1:k\PYZcb{})\PYZdl{} = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+We check whether the probablities summing up to 1 along the path! 
+ The sum of probablities at each time step 
+:  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+
+We print the probabilties of each position for a particular time step, given all observed position! \$p(x\_k|y\_\{1:k\})\$ =  
+ [0.      0.      0.      0.      0.      0.      0.50002 0.49998 0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.     ]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} compute (f) Most likely current position of the robot given the observations so far}
+         \PY{k+kn}{import} \PY{n+nn}{pandas}
+         
+         \PY{n}{max\PYZus{}idx} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{max\PYZus{}probs} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{max\PYZus{}probs}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most likely postion probilities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{probabilities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The probablities along the path for the most likely position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} 
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{x}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed postion y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{max\PYZus{}idx}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most likely postion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{One simulated scenario of actual and most likely position(given observed postion up to time k)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Q1.6}\label{q1.6}
+
+Assume now that at each step the robot can be kidnapped with probability
+κ. If the robot is kidnapped its new position is independent from its
+previous position and is uniformly distributed. Repeat 4 and 5 for this
+new model with κ = 0.1. Can you reuse your code?
+
+    \subsubsection{Comment to Q1.6}\label{comment-to-q1.6}
+
+Sure, we can reuse the code. The only thing we need to change is the
+transition model. Now the transition matrix will be different with the
+previous one.
+
+\[p(x_{k+1}|x_k=i)= \begin{pmatrix}
+ 0   \\
+...  \\
+1 - \epsilon  \\
+\epsilon  \\
+...  \\
+0 
+\end{pmatrix} * (1 -\kappa) + 
+\begin{pmatrix}
+ 1/N   \\
+...  \\
+ 1/N  \\
+  1/N \\
+...  \\
+  1/N
+\end{pmatrix} * \kappa, \ with\ \  each\  row \  corresponding\ to \ x_{k+1} = \  
+\begin{pmatrix}
+ 1   \\
+...  \\
+j \\
+i  \\
+...  \\
+N 
+\end{pmatrix}  \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Q1.6 }
+         \PY{c+c1}{\PYZsh{} update the tran\PYZus{}model}
+         
+         \PY{n}{tran\PYZus{}model} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} column : x\PYZus{}i value, row x\PYZus{}\PYZob{}i+1\PYZcb{} value}
+         \PY{n}{kappa} \PY{o}{=} \PY{l+m+mf}{0.1}
+         
+         \PY{c+c1}{\PYZsh{} probility vecotor of the position of x1, x1 correponding to zero index in the matched matrix or vector}
+         \PY{n}{x1\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{N} 
+         \PY{c+c1}{\PYZsh{}obs\PYZus{}model = obs\PYZus{}model * (1. \PYZhy{} w) / N}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{j} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mod}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{N}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} obs\PYZus{}model[i, i] = w + (1. \PYZhy{} w) / N}
+             \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{epsilon} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{kappa}\PY{p}{)}
+             \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{epsilon}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{kappa}\PY{p}{)}
+             \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{kappa} \PY{o}{/} \PY{n}{N}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Updated transition model probablities matrix (column:}\PY{l+s+s1}{\PYZsq{}} 
+                \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}i, row x\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i+1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{): }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tran\PYZus{}model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updated transition model probablities matrix (column:x\_i, row x\_\{i+1\}): 
+ [[0.272 0.632 0.002 {\ldots} 0.002 0.002 0.002]
+ [0.002 0.272 0.632 {\ldots} 0.002 0.002 0.002]
+ [0.002 0.002 0.272 {\ldots} 0.002 0.002 0.002]
+ {\ldots}
+ [0.002 0.002 0.002 {\ldots} 0.272 0.632 0.002]
+ [0.002 0.002 0.002 {\ldots} 0.002 0.272 0.632]
+ [0.632 0.002 0.002 {\ldots} 0.002 0.002 0.272]] 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Q1.6}
+         \PY{c+c1}{\PYZsh{} repeat  Q1.4 with the new trans\PYZus{}model}
+         
+         \PY{n}{xs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nr\PYZus{}sc}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{ys} \PY{o}{=} \PY{n}{xs}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} simulator the trajectory }
+         \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:}   
+             \PY{k}{for} \PY{n}{si} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nr\PYZus{}sc}\PY{p}{)}\PY{p}{:} 
+                 \PY{k}{if} \PY{n}{ti} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{c+c1}{\PYZsh{} the initial position is uniformly distributed among the N positions with 1/N probablity}
+                     \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{p}{)}      
+                 \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} pi \PYZgt{} 0}
+                     \PY{n}{x\PYZus{}ti\PYZus{}prob} \PY{o}{=} \PY{n}{tran\PYZus{}model}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+                     \PY{n}{rand\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}  
+                     \PY{n}{idx\PYZus{}loc} \PY{o}{=} \PY{n}{sample\PYZus{}loc}\PY{p}{(}\PY{n}{rand\PYZus{}prob}\PY{p}{,} \PY{n}{x\PYZus{}ti\PYZus{}prob}\PY{p}{)} 
+                     \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{idx\PYZus{}loc} 
+                 \PY{n}{y\PYZus{}ti\PYZus{}prob} \PY{o}{=} \PY{n}{obs\PYZus{}model}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{]}
+                 \PY{n}{rand\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}  
+                 \PY{n}{idx\PYZus{}loc} \PY{o}{=} \PY{n}{sample\PYZus{}loc}\PY{p}{(}\PY{n}{rand\PYZus{}prob}\PY{p}{,} \PY{n}{y\PYZus{}ti\PYZus{}prob}\PY{p}{)} 
+                 \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{idx\PYZus{}loc}
+                 
+         \PY{n}{si} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{timesteps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nr\PYZus{}ts}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{observed position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q1.6 repeat Q1.4: One simulated scenario of actual and observed position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Q1.6}
+         \PY{c+c1}{\PYZsh{} repeat Q1.5 with the new trans\PYZus{}model}
+         
+         \PY{c+c1}{\PYZsh{} Forward Pass}
+         \PY{n}{alpha\PYZus{}1\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{N}  \PY{c+c1}{\PYZsh{} alpha\PYZus{}1\PYZus{}0 = p(x\PYZus{}1)}
+         \PY{c+c1}{\PYZsh{} alpha\PYZus{}1\PYZus{}1 = obs\PYZus{}model.dot(alpha\PYZus{}1\PYZus{}0)  \PYZsh{} alpha\PYZus{}1\PYZus{}1 = p(y\PYZus{}1|x\PYZus{}1)p(x\PYZus{}1) = p(y\PYZus{}1|x\PYZus{}1) alpha\PYZus{}1\PYZus{}0}
+         
+         \PY{c+c1}{\PYZsh{} one scenario from the simulation}
+         \PY{n}{x} \PY{o}{=} \PY{n}{xs}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{si}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{p} \PY{o}{=} \PY{n}{alpha\PYZus{}1\PYZus{}0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{trans} \PY{o}{=} \PY{n}{tran\PYZus{}model}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} transition model   p(x\PYZus{}k | x\PYZus{}\PYZob{}k\PYZus{}1\PYZcb{})}
+         \PY{n}{obs} \PY{o}{=} \PY{n}{obs\PYZus{}model}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}     \PY{c+c1}{\PYZsh{} observation model  p(y\PYZus{}k | x\PYZus{}k)}
+         
+         \PY{n}{log\PYZus{}trans} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{trans}\PY{p}{)}
+         \PY{n}{log\PYZus{}obs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{obs}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} N: number of states/positions}
+         \PY{c+c1}{\PYZsh{} nr\PYZus{}ts: number of time steps}
+         
+         \PY{c+c1}{\PYZsh{} Python indices start from zero so}
+         \PY{n}{log\PYZus{}alpha}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} log \PYZbs{}alpha\PYZus{}\PYZob{}k|k\PYZcb{} will be in log\PYZus{}alpha[:,k\PYZhy{}1]}
+         \PY{n}{log\PYZus{}alpha\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}   \PY{c+c1}{\PYZsh{} log \PYZbs{}alpha\PYZus{}\PYZob{}k|k\PYZhy{}1\PYZcb{} will be in log\PYZus{}alpha\PYZus{}pred[:,k\PYZhy{}1]}
+         
+         \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ti}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{trans}\PY{p}{,} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}        
+             
+             \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{ti}\PY{p}{]}\PY{p}{,} \PY{n}{log\PYZus{}obs}\PY{p}{,} \PY{n}{log\PYZus{}alpha\PYZus{}pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{)}  
+             
+         
+         \PY{c+c1}{\PYZsh{} Backward Pass}
+         \PY{n}{log\PYZus{}beta}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}      \PY{c+c1}{\PYZsh{} beta\PYZus{}k|k}
+         \PY{n}{log\PYZus{}beta\PYZus{}post} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} beta\PYZus{}k|k+1}
+         
+         
+         \PY{n}{backward\PYZus{}range} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ti} \PY{o+ow}{in} \PY{n}{backward\PYZus{}range}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ti} \PY{o}{==} \PY{n}{nr\PYZus{}ts} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{postdict}\PY{p}{(}\PY{n}{trans}\PY{p}{,} \PY{n}{log\PYZus{}beta}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}beta}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]} \PY{o}{=} \PY{n}{update}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{ti}\PY{p}{]}\PY{p}{,} \PY{n}{log\PYZus{}obs}\PY{p}{,} \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ti}\PY{p}{]}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Q1.6}
+         \PY{c+c1}{\PYZsh{} repeat Q1.5 with the new trans\PYZus{}model}
+         
+         
+         \PY{c+c1}{\PYZsh{} Q1.5 Compute (a) Distribution of the robot’s current position given the observations so far, i.e. the filtering distribution: }
+         \PY{c+c1}{\PYZsh{}  i.e. p(xk|y1:k),  with  y1:k given!!!}
+         
+         \PY{c+c1}{\PYZsh{} the p(xk|y1:k) value along all the time steps, given the observed position up to the corresponding time step}
+         \PY{n}{p\PYZus{}xk\PYZus{}y1k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1k} \PY{o}{=} \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{\PYZhy{}} \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}kk}
+             \PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}
+             
+         
+         \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We check whether the probablities summing up to 1 along the path!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} 
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ The sum of probablities at each time step }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} random choose a k }
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We print the probabilties of each position for a particular time step}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ given observed position up to time k,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}p(x\PYZus{}k|y\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1:k\PYZcb{})\PYZdl{} = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+We check whether the probablities summing up to 1 along the path! 
+ The sum of probablities at each time step 
+:  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+
+We print the probabilties of each position for a particular time step 
+ given observed position up to time k, \$p(x\_k|y\_\{1:k\})\$ =  
+ [0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002
+ 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002
+ 0.00002 0.00002 0.00002 0.00002 0.00002 0.99709 0.00215 0.00002 0.00002
+ 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002
+ 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002 0.00002
+ 0.00002 0.00002 0.00002 0.00002 0.00002]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Q1.6}
+         \PY{c+c1}{\PYZsh{} repeat Q1.5 with the new trans\PYZus{}model}
+         
+         \PY{c+c1}{\PYZsh{} Q1.5(b) Distribution of the robot’s position at time step k given all the observations, i.e. the smoothing distribution: p(xk|y1:N)p(xk|y1:N). }
+         
+         \PY{c+c1}{\PYZsh{} the p(xk|y1:k) value along all the time steps, given the observation to the end}
+         \PY{n}{p\PYZus{}xk\PYZus{}y1N} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}ts}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}beta\PYZus{}post\PYZus{}kk} \PY{o}{=} \PY{n}{log\PYZus{}beta\PYZus{}post}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+             \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}NN} \PY{o}{=} \PY{n}{stable\PYZus{}logsumexp}\PY{p}{(}\PY{n}{log\PYZus{}alpha}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1N} \PY{o}{=} \PY{n}{log\PYZus{}alpha\PYZus{}kk} \PY{o}{+}  \PY{n}{log\PYZus{}beta\PYZus{}post\PYZus{}kk}  \PY{o}{\PYZhy{}}  \PY{n}{log\PYZus{}sum\PYZus{}alpha\PYZus{}NN}
+             \PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}p\PYZus{}xk\PYZus{}y1N}\PY{p}{)}
+             
+         
+         \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We check whether the probablities summing up to 1 along the path!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} 
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ The sum of probablities at each time step }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sum\PYZus{}p\PYZus{}over\PYZus{}path}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} random choose a k }
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{We print the probabilties of each position for a particular time step, given all observed position!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}p(x\PYZus{}k|y\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1:k\PYZcb{})\PYZdl{} = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{p\PYZus{}xk\PYZus{}y1N}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} compute (f) Most likely current position of the robot given the observations so far}
+         \PY{k+kn}{import} \PY{n+nn}{pandas}
+         
+         \PY{n}{max\PYZus{}idx} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{max\PYZus{}probs} \PY{o}{=} \PY{n}{pandas}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{p\PYZus{}xk\PYZus{}y1k}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{max\PYZus{}probs}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most likely postion probilities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{probabilities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q1.6, The probablities along the path for the most likely position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} 
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{x}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual position x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed postion y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{timesteps}\PY{p}{,} \PY{n}{max\PYZus{}idx}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most likely postion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q1.6, One simulated scenario of actual and most likely position(given observed postion up to time k)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+We check whether the probablities summing up to 1 along the path! 
+ The sum of probablities at each time step 
+:  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+
+We print the probabilties of each position for a particular time step, given all observed position! \$p(x\_k|y\_\{1:k\})\$ =  
+ [0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.00001 0.99991 0.00008 0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.      0.      0.      0.      0.
+ 0.      0.      0.      0.      0.     ]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

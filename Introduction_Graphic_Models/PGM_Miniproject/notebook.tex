@@ -1,0 +1,1297 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{mini\_project\_v\_8}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction to Probabilistic Graphical
+Models}\label{introduction-to-probabilistic-graphical-models}
+
+\subsection{Mini Project}\label{mini-project}
+
+\subsubsection{Author: Xiang Yu, Email:
+shawnxiangyu@yahoo.com}\label{author-xiang-yu-email-shawnxiangyuyahoo.com}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{norm}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{networkx} \PY{k}{as} \PY{n+nn}{nx}
+         \PY{k+kn}{import} \PY{n+nn}{pyparsing}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Math}
+         \PY{k+kn}{import} \PY{n+nn}{copy}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{patches} \PY{k}{import} \PY{n}{Ellipse} 
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{as} \PY{n+nn}{sio}
+         \PY{k+kn}{from} \PY{n+nn}{numba} \PY{k}{import} \PY{n}{njit}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{gridspec}
+         \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+         \PY{k+kn}{from} \PY{n+nn}{numba} \PY{k}{import} \PY{n}{jit}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         
+         
+         \PY{c+c1}{\PYZsh{} choose a large font size by default and use tex for math}
+         \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{axes.labelsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{fontsize} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{,}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{fontsize} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{,}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{legend.fontsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{fontsize} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{,}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xtick.labelsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{fontsize}\PY{p}{,}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ytick.labelsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{fontsize}\PY{p}{\PYZcb{}}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{params}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Question 1.1 : Draw the directed graphical
+model}\label{question-1.1-draw-the-directed-graphical-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Draw the directed graphical model: without S}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+         \PY{n}{Image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph\PYZus{}noS.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}11}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    The above directed graph is When S is not introduced. We only draw three
+elements of V, for the rest, the same pricipal applies. The node
+represented by \(...\) should follow the same pricipal as other nodes
+nearby.
+
+When S is introduced, the graph will be as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Draw the directed graphical model: with S introduced}
+         \PY{n}{Image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graphWithS.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}12}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    We only draw three elements of V, for the rest, the same pricipal
+applies. The node represented by \(...\) should follow the same pricipal
+as other nodes nearby.
+
+    \subsubsection{Question 1.2 Derive the EM algorithm for
+NMF}\label{question-1.2-derive-the-em-algorithm-for-nmf}
+
+    Non-negative matrix factorization (NMF or NNMF), also non-negative
+matrix approximation is a group of algorithms in multivariate analysis
+and linear algebra where a matrix V is factorized into (usually) two
+matrices W and H, with the property that all three matrices have no
+negative elements. (source: wiki)
+
+NMF is used for feature extraction and is generally seen to be useful
+when there are many attributes, particularly when the attributes are
+ambiguous or are not strong predictors. By combining attributes NMF can
+display patterns, topics, or themes which have importance. NMF method is
+found in many applications, for this project, our goal is to obtain a
+`parts-based-representation' of faces by learning an NMF model on AT\&T
+Database of Facesdataset. Our hope is that, when we estimate the
+matrices W and H by using V, the columns of W will correspond to some
+images that only contain a particular part of a face.
+
+\paragraph{\texorpdfstring{Goal: Find \(W, H\) such that for a given
+\(V\), \$ V \approx W
+H\$}{Goal: Find W, H such that for a given V, \$ V W H\$}}\label{goal-find-w-h-such-that-for-a-given-v-v-w-h}
+
+Given an \(F \times N\) matrix \(V\) with nonnegative elements, we wish
+to find nonnegative, rank-\(K\) matrices \(W\) (\(F \times K\)) and
+\(H\) (\(K \times N\)) such that \[ V \approx W H \]
+
+or more precisely: \[ V_{fn} \approx \sum_{k = 1}^{K} W_{fk} H_{kn}\]
+
+The goal can be achieved by solving the maximum a-posteriori estimate
+(MAP) problem, an optimization problem:
+\[ (W, H) \in  arg \max_{W,\  H \geq 0} P(W, H|V) \]
+
+The approximation between \(WH\) and \(V\) could be measured by
+Kullback--Leibler(KL) divergence
+
+    \paragraph{E-step 1: E function
+overview}\label{e-step-1-e-function-overview}
+
+In the following calculation, when no confusion occurs, we use \(Z\) to
+denote the parameters \((W, H)\),i.e. \(Z = (W, H)\), and assuming the
+independce between \(W, H\), we have \(P(Z) = P(W, H) = P(W)P(H)\), then
+
+\[ P(W, H|V) = P(Z|V) = P(V,Z)P(V) \]
+
+We could solve the optimization problem with
+Expectation--maximization(EM) algorithm taught during the lecture.
+
+Here we introduce a latent variable \(S\) with the following properties:
+
+\[q(S) > 0,\  \sum_S q(S) = 1 \]
+
+Then the original optimization problem will be equivilant to
+
+\begin{align}
+arg \max_{W,\  H \geq 0} P(W, H|V)  
+& \propto  arg \max_{Z \geq 0} P(Z|V) \\
+& \propto  arg \max_{Z \geq 0} \log P(Z|V) \\
+& \propto  arg \max_{Z \geq 0} \log (P(V, Z)P(V)) \\ 
+& \propto  arg \max_{Z \geq 0} \log P(V, Z)
+\end{align}
+
+    And
+
+\begin{align}
+\log P(V, Z)
+&=  \log \sum_S P(V, S, Z) \\
+& = \log \sum_S P(V, S, Z) \frac{q(S)}{q(S)} \\
+& = \log \sum_S \frac{P(V, S, Z)}{q(S)} q(S) \\
+& = \log \mathbb{E}[\frac{P(V, S, Z)}{q(S)}]_{q(S)} \\
+& \geq \mathbb{E} \log [\frac{P(V, S, Z)}{q(S)}]_{q(S)}
+\end{align}
+
+We have proved during the lecture for EM algorithm that:
+
+\[ q(S) = P(S|V, Z)\]
+
+    Then we have
+
+\begin{align}
+\log P(V, Z) \geq \mathbb{E} \log [\frac{P(V, S, Z)}{q(S)}]_{q(S)} 
+&  = \sum q(S) \log \frac{P(V, S, Z)}{q(S)} \\
+&  = \sum q(S) \log {P(V, S, Z)} - \sum q(S) \log q(S) \\
+&  = \mathbb{E} [\log P(V, S, Z)]_{q(S)} - \mathbb{E} [\log q(S)]_{q(S)} \\
+&  = \mathbb{E} [\log P(V, S, Z)]_{P(S|V, Z^{t})} - \mathbb{E} [\log P(S|V, Z^{t})]_{P(S|V, Z^{t})}
+\end{align}
+
+We need to maximize the right side of above equaiton with respect to the
+parameter \(Z = (W, H)\), given \(Z^t\). Then,
+
+    \[
+arg \max_{Z \geq 0} \mathbb{E} [\log P(V, S, Z)]_{P(S| V, Z^{t})} - \mathbb{E} [\log P(S|V, Z^{t})]_{P(S|V, Z^{t})}  \propto arg \max_{Z \geq 0} \mathbb{E} [\log P(V, S, Z)]_{P(S|V, Z^{t})}
+\]
+
+Then we have the E-step function to be maximized as follows:
+\[L(Z) = \mathbb{E} [\log P(V, S, Z)]_{P(S|V, Z^{t})}\]
+
+    In order to calculate \(L(Z)\), we should calculate the terms in
+\(L(Z)\) first. I.e. the following two terms: - \(P(S|V, Z^{t})\) -
+\(\log P(V, S, Z)\)
+
+\paragraph{\texorpdfstring{E-step 2: term
+\(P(S|V, Z^{t})\)}{E-step 2: term P(S\textbar{}V, Z\^{}\{t\})}}\label{e-step-2-term-psv-zt}
+
+We have:
+\[P(S|V, Z^{t}) = \frac{P(S, V, Z^{t})}{P(V, Z^{t})} = \frac{P(S, V|Z^{t})}{P(V|Z^{t})}\]
+
+And according to the directed graph model in Question 1.1, we have:
+
+\[P(S, V|Z^{t}) = P(V|S)P(S|Z^{t})\]
+
+Therefore, we have:
+\[P(S|V, Z^{t}) = \frac{P(V|S)P(S|Z^{t})}{P(V|Z^{t})}\]
+
+Notice: the \(S\) is introduced to have the following properties:
+
+\[V_{fn} = \sum_{k = 1}^{K} S_{f\_k\_n}, \  S_{f\_k\_n} \sim \operatorname{Poisson}(S_{f\_k\_n}; W_{fk} H_{kn}) \]
+
+When no confusion occurs, we write:
+\[S_{f\_k\_n}: = S_k, \ and \  W_{fk} H_{kn}: = Z_{f\_k\_n}\]
+
+    Thus:
+
+\[V_{fn} = \sum_{k = 1}^{K} S_k, \  S_k\sim \operatorname{Poisson}(S_k; Z_{f\_k\_n}) \]
+
+From Poission distribution we know that for any \(a, b\), we have:
+\[\operatorname{Poisson}(a; b) = P(a|b) = \exp (a \log b - b - \log \Gamma (a + 1)) \]
+
+Then:
+\[P(S_k|Z_k^{t}) = \operatorname{Poisson}(S_k; W_{fk}^tH_{kn}^t) = \operatorname{Poisson}(S_k; Z_{f\_k\_n}^t) = \exp (S_k \log Z_{f\_k\_n}^t - Z_{f\_k\_n}^t - \log \Gamma (S_k + 1))  \]
+
+With \(V_{fn} = \sum_{k = 1}^{K} S_k\) and
+\$S\_k\sim \operatorname{Poisson}(S\_k; Z\_\{f\_k\_n\}) \$, and
+according to the well-know superposition property of Poisson random
+variables. we have:
+
+\[P(V_{fn}|Z^{t}) \sim \operatorname{Poisson}(V_{fn}; \sum_{k = 1}^{K}  Z_{f\_k\_n}^t)\]
+
+We also have:
+\[P(V_{fn}|S) = P(V_{fn}|S_{1:K}) = \delta (V_{fn}- \sum_{k = 1}^{K} S_k)\]
+where: \[
+\delta(x) = \{
+\begin{array}{ll}
+  1, \ if \ x = 0 \\
+  0, \ otherwise
+\end{array}
+\]
+
+With the given information and the lecture notes, we know that
+\(P(S_{1:K}|V_{fn})\) follows a multinomial distribution, with
+
+\[P(S_{1:K}|V_{fn}) =\delta (V_{fn}- \sum_{k = 1}^{K} S_k) \frac{V_{fn}!}{S_1!S_2!...S_K!}(\frac{Z_{f\_1\_n}}{\sum_k Z_{f\_k\_n}})^{S_1}...(\frac{Z_{f\_K\_n}}{\sum_k Z_{f\_k\_n}})^{S_K}\]
+
+    Then:
+\[\log P(S|V, Z^{t}) = \log \frac{P(V|S)P(S|Z^{t})}{P(V|Z^{t})} = \log P(V|S)P(S|Z^{t}) - \log P(V|Z^{t}) \]
+
+Where
+
+\begin{align}
+\log P(V|Z^{t})
+& = \log \Pi_{f,\  n} \operatorname{Poisson}(V_{fn}; \sum_{k = 1}^{K}  Z_{f\_k\_n}^t) \\
+& = \sum_{f,\  n} \log \operatorname{Poisson}(V_{fn}; \sum_{k = 1}^{K}  Z_{f\_k\_n}^t) \\
+&= \sum_{f,\  n} (V_{fn} \log \sum_k Z_{f\_k\_n}^t - \sum_k Z_{f\_k\_n}^t - \log \Gamma (V_{fn} + 1)) 
+\end{align}
+
+and
+
+\begin{align}
+\log P(V|S)P(S|Z^{t})
+& = \log \Pi_{f,\  n} [P(V_{fn}|S_{1:K}) \Pi_{k = 1}^{K} P(S_k|Z_{f\_k\_n}^t)] \\
+& = \sum_{f,\  n} [\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) + \sum_{k = 1}^{K} \log \operatorname{Poisson}(S_k; Z_{f\_k\_n}^t)] \\
+&= \sum_{f,\  n} [\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) + \sum_{k = 1}^{K} (S_k \log Z_{f\_k\_n}^t - Z_{f\_k\_n}^t - \log \Gamma (S_k + 1))]
+\end{align}
+
+    \paragraph{\texorpdfstring{E-step 3: term
+\(\log P(V, S, Z)\)}{E-step 3: term \textbackslash{}log P(V, S, Z)}}\label{e-step-3-term-log-pv-s-z}
+
+We have:
+
+\[ P(V, S, Z) = P(V|S, Z)P(S, Z) = P(V|S)P(S|Z)P(Z) = P(V|S)P(S|WH)P(W, H) = P(V|S)P(S|WH)P(W)P(H) \]
+
+For \(W\) and \(H\), we assume them to follow Gamma distribution due to
+the computational convenience. I.e. we have:
+
+\[W_{fk} \sim \gamma(W_{fk}; \alpha_w, \beta_w)\]
+\[H_{kn} \sim \gamma(H_{kn}; \alpha_h, \beta_h)\]
+
+Where \(\alpha \geq 0\) is the shape parameter and \(\beta\) the scale
+parameter, and
+\[ \gamma(x; \alpha, \beta) = \exp((\alpha - 1)\log x - \frac{x}{\beta} - \log \Gamma(\alpha) - \alpha\log \beta )\]
+
+Then we have:
+
+\begin{align}
+\log P(V, S, Z) 
+& = \log P(V|S)P(S|WH)P(W)P(H)  \\
+& = \log \Pi_{f,\  n} [P(V_{fn}|S_{1:K}) \Pi_{k = 1}^{K} P(S_k|Z_{f\_k\_n})P(W_{fk})P(H_{kn})] \\
+& = \sum_{f,\  n} \{\log P(V_{fn}|S_{1:K}) \sum_{k = 1}^{K} [\log P(S_k|Z_{f\_k\_n}) + \log P(W_{fk}) + \log P(H_{kn})]\}\\
+& = \sum_{f,\  n} [\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) + \sum_{k = 1}^{K} (\log \operatorname{Poisson}(S_k; Z_{f\_k\_n})  + \log P(W_{fk}) + \log P(H_{kn})) ] \\
+&= \sum_{f,\  n} \{\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) \\
+& \ \ \ + \sum_{k = 1}^{K} [S_k \log Z_{f\_k\_n} - Z_{f\_k\_n} - \log \Gamma (S_k + 1) + \log \gamma(W_{fk}, \alpha_w, \beta_w) + \log \gamma(H_{kn}, \alpha_h, \beta_h)]\} \\
+& = \sum_{f,\  n} \{\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) + \sum_{k = 1}^{K} [S_k \log Z_{f\_k\_n} - Z_{f\_k\_n} - \log \Gamma (S_k + 1) \\
+& \ \ \  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w} - \log \Gamma(\alpha_w) - \alpha_w \log \beta_w 
++ (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h} - \log \Gamma(\alpha_h) - \alpha_h \log \beta_h]\} 
+\end{align}
+
+    \paragraph{E-step 4: E-function in
+detail:}\label{e-step-4-e-function-in-detail}
+
+We have the expectation function as follows:
+\[L(Z) = \mathbb{E} [\log P(V, S, Z)]_{P(S|V, Z^{t})}\]
+
+Denote: \(P(S|V, Z^{t}): = \gamma^t\), then:
+
+\begin{align}
+\max_Z L(Z) 
+& = \max_Z \mathbb{E} [\log P(V, S, Z)]_{\gamma^t} \\
+& = \max_{W, H} \mathbb{E} [\log P(V|S)P(S|WH)P(W)P(H)]_{\gamma^t} \\
+& = \max_{W, H}  \mathbb{E} \sum_{f,\  n} \{\log P(V_{fn}|S_{1:K}) \sum_{k = 1}^{K} [\log P(S_k|Z_{f\_k\_n}) + \log P(W_{fk}) + \log P(H_{kn})]\}_{\gamma^t} \\
+&= \max_{W, H} \sum_{f,\  n} \{ \mathbb{E}[\log P(V_{fn}|S_{1:K})]_{\gamma^t} + \mathbb{E}[\sum_{k = 1}^{K}(\log P(S_k|Z_{f\_k\_n}) + \log P(W_{fk}) + \log P(H_{kn}))]_{\gamma^t} \} \\
+&  \propto \max_{W, H}  \sum_{f,\  n} \mathbb{E}[\sum_{k = 1}^{K}(\log P(S_k|Z_{f\_k\_n}) + \log P(W_{fk}) + \log P(H_{kn}))]_{\gamma^t} \\
+&= \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K} \mathbb{E}[\log P(S_k|Z_{f\_k\_n}) + \log P(W_{fk}) +  \log P(H_{kn})]_{\gamma^t} \\
+&= \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K} \mathbb{E} \{S_k \log Z_{f\_k\_n} - Z_{f\_k\_n} - \log \Gamma (S_k + 1) \\
+& \ \ \ + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w} - \log \Gamma(\alpha_w) - \alpha_w \log \beta_w +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h} - \log \Gamma(\alpha_h) - \alpha_h \log \beta_h \}_{\gamma^t} \\
+&=  \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K}   \mathbb{E}\{S_k \log (W_{fk}H_{kn}) -  W_{fk}H_{kn} - \log \Gamma (S_k + 1) \\
+& \ \ \ + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w} - \log \Gamma(\alpha_w) - \alpha_w \log \beta_w +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h} - \log \Gamma(\alpha_h) - \alpha_h \log \beta_h \}_{\gamma^t} \\
+& \propto \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K}  \mathbb{E} \{S_k \log (W_{fk}H_{kn}) -  W_{fk}H_{kn}  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w}  +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h}\}_{\gamma^t}
+\end{align}
+
+    We have
+\[ \gamma^t = P(S|V, Z^{t}) = \frac{P(S, V, Z^{t})}{P(V, Z^{t})}\] and
+\[\sum_S \gamma^t = \sum_S \frac{P(S, V, Z^{t})}{P(V, Z^{t})} = 1 \]
+Therefore:
+\[\mathbb{E} [Z]_{\gamma^t} = Z, \mathbb{E} [W]_{\gamma^t} = W, \mathbb{E} [H]_{\gamma^t} = H\]
+
+    We could further simplify the objective function:
+
+\begin{align}
+\max_Z L(Z) 
+& \propto \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K}  \mathbb{E} \{S_k \log (W_{fk}H_{kn}) -  W_{fk}H_{kn}  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w}  +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h}\}_{\gamma^t} \\
+& = \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K}  \{\mathbb{E} [S_k \log (W_{fk}H_{kn})]_{\gamma^t}  -  W_{fk}H_{kn}  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w}  +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h} \}
+\end{align}
+
+    For the term \(\mathbb{E} [S_k \log (W_{fk}H_{kn})]_{\gamma^t}\), we
+could calcualate based on the distribution of \(S_k\) and the value of
+\(\gamma^t\).
+
+\[\mathbb{E} [S_k \log (W_{fk}H_{kn})]_{\gamma^t} = \log (W_{fk}H_{kn})\mathbb{E} [S_k]_{\gamma^t} \]
+We have:
+
+\begin{align}
+\log \gamma^t 
+& = \log P(S|V, Z^{t}) \\
+& = \log P(V|S)P(S|Z^{t}) - \log P(V|Z^{t}) \\
+& = \sum_{f,\  n} [\log \delta (V_{fn}- \sum_{k = 1}^{K} S_k) + \sum_{k = 1}^{K} (S_k \log Z_{f\_k\_n}^t - Z_{f\_k\_n}^t - \log \Gamma (S_k + 1))] - \sum_{f,\  n} (V_{fn} \log \sum_k Z_{f\_k\_n}^t - \sum_k Z_{f\_k\_n}^t - \log \Gamma (V_{fn} + 1)) 
+\end{align}
+
+    We have
+\[V_{fn} = \sum_{k = 1}^{K} S_k, \  S_k = S_{f\_k\_n} \sim \operatorname{Poisson}(S_{f\_k\_n}; W_{fk} H_{kn}) \]
+Therefore we could simplify the term with
+\$\mathbb{E}{[}S\_k{]}\_\{\gamma\^{}t\} \$ here based on the properties
+of mutilnomial and Possion distribution:\\
+\[ \mathbb{E}[S_k]_{\gamma^t} = \mathbb{E}[S_{f\_k\_n}]_{\gamma^t} = V_{fn}P(S_{f\_k\_n}) = V_{fn} \frac{Z_{f\_k\_n}^t}{\sum_{k=1}^K Z_{f\_k\_n}^t} = V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t}\]
+
+    Then,
+\[\mathbb{E} [S_k \log (W_{fk}H_{kn})]_{\gamma^t} = \log (W_{fk}H_{kn}) V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t}\]
+
+    Therefore \[
+\max_Z L(Z)  \propto \max_{W, H}  \sum_{f,\  n} \sum_{k = 1}^{K}  \{ \log (W_{fk}H_{kn}) V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t} -  W_{fk}H_{kn}  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w}  +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h} \}
+\]
+
+    \paragraph{M-step: update W and H}\label{m-step-update-w-and-h}
+
+    We could update the objective function \(L(Z)\) as
+\(L(W, H) = \sum_{f,k,n}l(W_{fk}, H_{kn})\), where
+
+\[l(W_{fk}, H_{kn}) = \log (W_{fk}H_{kn}) V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t} -  W_{fk}H_{kn}  + (\alpha_w - 1)\log W_{fk} - \frac{W_{fk}}{\beta_w}  +  (\alpha_h - 1)\log H_{kn} - \frac{H_{kn}}{\beta_h}\]
+
+    \begin{align}
+\frac{\partial l}{\partial W_{fk}} 
+& = \frac{1}{W_{fk}}V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t} - H_{kn} + \frac{\alpha_w - 1}{W_{fk}} - \frac{1}{\beta_w}\\
+& =  \frac{\alpha_w - 1 + V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t}}{W_{fk}} - H_{kn}  - \frac{1}{\beta_w}
+\end{align}
+
+Then,
+
+\begin{align}
+\frac{\partial L(W, H) }{\partial W_{fk}} 
+& = \frac{\alpha_w - 1 + \sum_n (V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t})}{W_{fk}} -\sum_n H_{kn}  - \frac{1}{\beta_w} \overset{!}{=} 0
+\end{align}
+
+Therefore:
+\[ W_{fk}^{t+1} = \frac{\alpha_w - 1 + \sum_n (V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t}) }{\sum_n H_{kn}  + \frac{1}{\beta_w} }\]
+
+    Similarly,
+
+\begin{align}
+\frac{\partial l}{\partial H_{kn}} 
+& = \frac{1}{H_{kn}}V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t} - W_{fk} + \frac{\alpha_h - 1}{H_{kn}} - \frac{1}{\beta_h}\\
+& =  \frac{\alpha_h - 1 + V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t}}{H_{kn}} - W_{fk}  - \frac{1}{\beta_h}
+\end{align}
+
+\begin{align}
+\frac{\partial L(W, H)}{\partial H_{kn}} 
+& = \frac{\alpha_h - 1 + \sum_f (V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t})}{H_{kn}} - \sum_f W_{fk}  - \frac{1}{\beta_h}  \overset{!}{=} 0
+\end{align}
+
+    Therefore:
+\[ H_{kn}^{t+1} = \frac{ \alpha_h - 1 + \sum_f[V_{fn} \frac{W_{fk}^t H_{kn}^t}{\sum_{k=1}^K W_{fk}^t H_{kn}^t} ]}{\sum_f W_{fk} + \frac{1}{\beta_h}}\]
+
+    \subsubsection{Question 2}\label{question-2}
+
+    \paragraph{Question 2.1 Implementation of EM for
+NMF}\label{question-2.1-implementation-of-em-for-nmf}
+
+    \subparagraph{load the input data}\label{load-the-input-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} read the raw data }
+         \PY{c+c1}{\PYZsh{} please put the input data under the same folder}
+         \PY{n}{imgs\PYZus{}data} \PY{o}{=} \PY{n}{sio}\PY{o}{.}\PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attfaces.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{V} \PY{o}{=} \PY{n}{imgs\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subparagraph{EM method}\label{em-method}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Kullback\PYZhy{}Leibler divergence}
+         \PY{k}{def} \PY{n+nf}{kl}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Kullback\PYZhy{}Leibler divergence D(P || Q) for discrete distributions}
+         \PY{l+s+sd}{    Parameters}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    p, q : array\PYZhy{}like, dtype=float, shape=n: p: V, q: NewV}
+         \PY{l+s+sd}{    Discrete probability distributions.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}  
+             \PY{n}{eps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{finfo}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}\PY{o}{.}\PY{n}{eps}
+             \PY{n}{p} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{)}
+             \PY{n}{q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float}\PY{p}{)}
+             \PY{n}{p}\PY{p}{[}\PY{n}{p} \PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{eps}\PY{p}{]} \PY{o}{=} \PY{n}{eps}
+             \PY{n}{q}\PY{p}{[}\PY{n}{q} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{eps}\PY{p}{]} \PY{o}{=} \PY{n}{eps} 
+             \PY{k}{return} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{p} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{q} \PY{o}{/} \PY{n}{p}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{q} \PY{o}{+} \PY{n}{p}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{updateWH}\PY{p}{(}\PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{Wt}\PY{p}{,} \PY{n}{Ht}\PY{p}{,} \PY{n}{para\PYZus{}wh}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}\PY{p}{:} 
+             
+             \PY{n}{alpha\PYZus{}w} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{beta\PYZus{}w} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{alpha\PYZus{}h} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{beta\PYZus{}h} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         
+             \PY{n}{Diffs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nr\PYZus{}iter} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+           
+             \PY{c+c1}{\PYZsh{} Diffs[0] = kl(V,  Wt.dot(Ht)) \PYZsh{} use KL divergence}
+             \PY{n}{Diffs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{Wt}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Ht}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} use Euclidean distance to measure the approximation}
+             \PY{n}{max\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{500}  
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}iter}\PY{p}{)}\PY{p}{:} 
+                 \PY{n}{Wtp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{n}{Wt} \PY{o}{*} \PY{p}{(}\PY{n}{V} \PY{o}{/} \PY{n}{Wt}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Ht}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Ht}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{alpha\PYZus{}w} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{Ht} \PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{beta\PYZus{}w}\PY{p}{)}
+                 \PY{n}{Htp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{p}{(}\PY{n}{Wtp}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{V} \PY{o}{/} \PY{n}{Wtp}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Ht}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{Ht} \PY{o}{+} \PY{p}{(}\PY{n}{alpha\PYZus{}h} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{Wtp} \PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{beta\PYZus{}h}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                 \PY{n}{Wt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Wtp}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} enforce the non\PYZhy{}negative properties}
+                 \PY{n}{Ht} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Htp}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}Diffs[i+1] = kl(V,  Wt.dot(Ht))}
+                 \PY{n}{Diffs}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{Wt}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Ht}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Diffs}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{Diffs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{Diffs}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{threshold} \PY{o+ow}{or} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}iter}\PY{p}{:} 
+                     \PY{n}{Diffs} \PY{o}{=} \PY{n}{Diffs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{k}{break}      
+             \PY{k}{return} \PY{n}{Diffs}\PY{p}{,} \PY{n}{Wt}\PY{p}{,} \PY{n}{Ht}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} initialize the W, H from gamma distribution}
+         \PY{k}{def} \PY{n+nf}{init\PYZus{}para}\PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{size}\PY{p}{)}\PY{p}{:} 
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{gamma}\PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{size}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{EM}\PY{p}{(}\PY{n}{para\PYZus{}wh}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{nr\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}\PY{p}{:}
+         
+             \PY{c+c1}{\PYZsh{} initialize one set of inputs for EM algorithm}
+             \PY{n}{alpha\PYZus{}w} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{beta\PYZus{}w} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} 
+             \PY{n}{alpha\PYZus{}h} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{beta\PYZus{}h} \PY{o}{=} \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         
+             \PY{n}{W\PYZus{}init} \PY{o}{=} \PY{n}{init\PYZus{}para}\PY{p}{(}\PY{n}{alpha\PYZus{}w}\PY{p}{,} \PY{n}{beta\PYZus{}w}\PY{p}{,} \PY{p}{(}\PY{n}{F}\PY{p}{,} \PY{n}{K}\PY{p}{)}\PY{p}{)}
+             \PY{n}{H\PYZus{}init} \PY{o}{=} \PY{n}{init\PYZus{}para}\PY{p}{(}\PY{n}{alpha\PYZus{}h}\PY{p}{,} \PY{n}{beta\PYZus{}h}\PY{p}{,} \PY{p}{(}\PY{n}{K}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H} \PY{o}{=} \PY{n}{updateWH}\PY{p}{(}\PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{W\PYZus{}init}\PY{p}{,} \PY{n}{H\PYZus{}init}\PY{p}{,} \PY{n}{para\PYZus{}wh}\PY{p}{,} \PY{n}{threshold}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{size} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+         \PY{n}{K} \PY{o}{=} \PY{l+m+mi}{25}
+         \PY{n}{F} \PY{o}{=} \PY{n}{size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{N} \PY{o}{=} \PY{n}{size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} run EM algorithm with the intilized data}
+         \PY{n}{nr\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{300}
+         \PY{n}{para\PYZus{}wh} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H} \PY{o}{=} \PY{n}{EM}\PY{p}{(}\PY{n}{para\PYZus{}wh}\PY{p}{,} \PY{n}{K}\PY{p}{,} \PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}img}\PY{p}{(}\PY{n}{imgs}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{n}{titlestr}\PY{p}{,} \PY{n}{grayscale}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:} 
+             
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}    
+             \PY{n}{gs1} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{gs1}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} set the spacing between axes.}
+             \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{grayscale} \PY{o}{==} \PY{k+kc}{False} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{img\PYZus{}nr} \PY{o}{=} \PY{l+m+mi}{0} 
+             
+             \PY{k}{for} \PY{n}{rowi} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{)}\PY{p}{:}     
+                 \PY{n}{img\PYZus{}ij} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 
+                 \PY{k}{for} \PY{n}{colj} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}cols}\PY{p}{)}\PY{p}{:}                  
+                     \PY{n}{img\PYZus{}j} \PY{o}{=} \PY{n}{imgs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{img\PYZus{}nr}\PY{p}{]}
+                     \PY{k}{if} \PY{n}{colj} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} 
+                         \PY{n}{img\PYZus{}ij} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{img\PYZus{}ij}\PY{p}{,} \PY{n}{img\PYZus{}j}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:} 
+                         \PY{n}{img\PYZus{}ij} \PY{o}{=} \PY{n}{img\PYZus{}j}
+                     \PY{n}{img\PYZus{}nr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+                 \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs1}\PY{p}{[}\PY{n}{rowi}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}ij}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}
+                 \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+         
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{titlestr}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}       
+                     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} plot W}
+         \PY{n}{W\PYZus{}imgs} \PY{o}{=} \PY{n}{W}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{92}\PY{p}{,} \PY{l+m+mi}{112}\PY{p}{,} \PY{n}{K}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}img}\PY{p}{(}\PY{n}{W\PYZus{}imgs}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visualize W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} plot the convergence graph}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Diffs}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Diffs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nr\PYZus{}interations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Residual errors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Euclidean distance between V and V\PYZus{}new}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Iteration number set to
+150}\label{iteration-number-set-to-150}
+
+As shown from the above graphs, the model approximates a converged state
+after around 150 iterations, i.e. after around 150, the accruacy does
+not improve significantly. Then, we choose the number of iterations to
+be 150 as a compromise between speed and accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} plot several (randomly chosen) origial pictures and new pictures from V and NewV}
+         \PY{n}{NewV} \PY{o}{=} \PY{n}{W}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{H}\PY{p}{)}
+         \PY{n}{nr\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{nr\PYZus{}cols} \PY{o}{=} \PY{n}{nr\PYZus{}rows}
+         \PY{n}{NrP} \PY{o}{=} \PY{n}{nr\PYZus{}rows} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} 
+         
+         \PY{n}{idx\PYZus{}start} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{o}{\PYZhy{}}\PY{n}{NrP}\PY{p}{)}
+         
+         \PY{n}{V\PYZus{}NrP} \PY{o}{=} \PY{n}{V}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{idx\PYZus{}start}\PY{p}{:}\PY{n}{idx\PYZus{}start}\PY{o}{+}\PY{n}{NrP}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{92}\PY{p}{,} \PY{l+m+mi}{112}\PY{p}{,} \PY{n}{NrP}\PY{p}{)}\PY{p}{)}
+         \PY{n}{NewV\PYZus{}NrP} \PY{o}{=} \PY{n}{NewV}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{idx\PYZus{}start}\PY{p}{:}\PY{n}{idx\PYZus{}start}\PY{o}{+}\PY{n}{NrP}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{92}\PY{p}{,} \PY{l+m+mi}{112}\PY{p}{,} \PY{n}{NrP}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}img}\PY{p}{(}\PY{n}{V\PYZus{}NrP}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plot original }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{NrP}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ pictures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot\PYZus{}img}\PY{p}{(}\PY{n}{NewV\PYZus{}NrP}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plot new }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{NrP}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ pictures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{\texorpdfstring{Question 2.2 run the algorithm with
+different \(\beta_w\) and \(\beta_h\), with
+\(K= 25, \alpha_w = \alpha_h =1\)}{Question 2.2 run the algorithm with different \textbackslash{}beta\_w and \textbackslash{}beta\_h, with K= 25, \textbackslash{}alpha\_w = \textbackslash{}alpha\_h =1}}\label{question-2.2-run-the-algorithm-with-different-beta_w-and-beta_h-with-k-25-alpha_w-alpha_h-1}
+
+    \subparagraph{Q2.2 set the parameters for different
+betas}\label{q2.2-set-the-parameters-for-different-betas}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} set the parameters for different betas}
+         \PY{n}{nr\PYZus{}cases} \PY{o}{=} \PY{l+m+mi}{9}
+         \PY{n}{paras} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{beta\PYZus{}w} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.7}\PY{p}{]}
+         \PY{n}{beta\PYZus{}h} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.7}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{para\PYZus{}wh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} alpah\PYZus{}w = 1 }
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} alpah\PYZus{}h = 1}
+             \PY{n}{beta\PYZus{}w\PYZus{}id} \PY{o}{=} \PY{n}{i} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}
+             \PY{n}{beta\PYZus{}h\PYZus{}id} \PY{o}{=} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3}
+             
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{beta\PYZus{}w}\PY{p}{[}\PY{n}{beta\PYZus{}w\PYZus{}id}\PY{p}{]}
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{beta\PYZus{}h}\PY{p}{[}\PY{n}{beta\PYZus{}h\PYZus{}id}\PY{p}{]} 
+             
+             \PY{n}{paras}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{para\PYZus{}wh}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{Q2.2 run EM with different
+betas}\label{q2.2-run-em-with-different-betas}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{Diffs\PYZus{}betas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Ws\PYZus{}betas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Hs\PYZus{}betas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{nr\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{150} 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{para\PYZus{}whi} \PY{o}{=} \PY{n}{paras}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H} \PY{o}{=} \PY{n}{EM}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{,} \PY{n}{K}\PY{p}{,} \PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+             
+             \PY{n}{Diffs\PYZus{}betas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Diffs}\PY{p}{)}
+             \PY{n}{ErrInfStr} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, beta\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}
+                 \PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, alpha\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, beta\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Case }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{ErrInfStr} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,  Final Error: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{Diffs}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Ws\PYZus{}betas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{W}\PY{p}{)}
+             \PY{n}{Hs\PYZus{}betas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{H}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Case 1: alpha\_w = 1.0, beta\_w = 0.3, alpha\_h = 1.0, beta\_h = 0.3,  Final Error: 46551.91
+Case 2: alpha\_w = 1.0, beta\_w = 0.3, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 46434.65
+Case 3: alpha\_w = 1.0, beta\_w = 0.3, alpha\_h = 1.0, beta\_h = 1.7,  Final Error: 46505.39
+Case 4: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 0.3,  Final Error: 47085.78
+Case 5: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 46528.92
+Case 6: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 1.7,  Final Error: 46399.86
+Case 7: alpha\_w = 1.0, beta\_w = 1.7, alpha\_h = 1.0, beta\_h = 0.3,  Final Error: 46332.02
+Case 8: alpha\_w = 1.0, beta\_w = 1.7, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 46490.58
+Case 9: alpha\_w = 1.0, beta\_w = 1.7, alpha\_h = 1.0, beta\_h = 1.7,  Final Error: 46614.53
+
+    \end{Verbatim}
+
+    \subparagraph{Q 2.2 Plot the Ws for differnt beta\_w and
+beta\_h}\label{q-2.2-plot-the-ws-for-differnt-beta_w-and-beta_h}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{transfer\PYZus{}W}\PY{p}{(}\PY{n}{W\PYZus{}s}\PY{p}{)}\PY{p}{:} 
+             \PY{c+c1}{\PYZsh{} transfer W into a form that could be plot directly}
+             \PY{n}{size} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{W\PYZus{}s}\PY{p}{)} \PY{c+c1}{\PYZsh{} F * K}
+             \PY{n}{K} \PY{o}{=} \PY{n}{size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{n}{nr\PYZus{}rows} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{K} \PY{o}{*}\PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)}
+             \PY{n}{nr\PYZus{}cols} \PY{o}{=} \PY{n}{nr\PYZus{}rows}
+             
+             \PY{n}{part\PYZus{}nr} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{img\PYZus{}rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{rowi} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{)}\PY{p}{:}     
+                 \PY{n}{img\PYZus{}row\PYZus{}i} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{colj} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cols}\PY{p}{)}\PY{p}{:}  
+                     \PY{n}{img\PYZus{}j} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                     \PY{k}{if} \PY{n}{part\PYZus{}nr} \PY{o}{\PYZlt{}} \PY{n}{K}\PY{p}{:}
+                         \PY{n}{img\PYZus{}j} \PY{o}{=} \PY{n}{W\PYZus{}s}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{part\PYZus{}nr}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{92}\PY{p}{,} \PY{l+m+mi}{112}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:} 
+                         \PY{k}{break}
+                     \PY{k}{if} \PY{n}{colj} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} 
+                         \PY{n}{img\PYZus{}ij} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{img\PYZus{}ij}\PY{p}{,} \PY{n}{img\PYZus{}j}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:} 
+                         \PY{n}{img\PYZus{}ij} \PY{o}{=} \PY{n}{img\PYZus{}j}\PY{o}{.}\PY{n}{T}
+                     \PY{n}{part\PYZus{}nr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1} 
+                     
+                 \PY{k}{if} \PY{n}{rowi} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} 
+                     \PY{n}{img\PYZus{}rows} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{img\PYZus{}rows}\PY{p}{,} \PY{n}{img\PYZus{}ij}\PY{p}{)}\PY{p}{)} 
+                 \PY{k}{else}\PY{p}{:} 
+                     \PY{n}{img\PYZus{}rows} \PY{o}{=} \PY{n}{img\PYZus{}ij}    
+                     
+             \PY{k}{return}  \PY{n}{img\PYZus{}rows}       
+         
+         
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}Ws}\PY{p}{(}\PY{n}{Ws}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{n}{titlestr}\PY{p}{,} \PY{n}{grayscale}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:} 
+             \PY{c+c1}{\PYZsh{} plot the Ws generated from different parameters }
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}    
+             \PY{n}{gs1} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{)}
+             \PY{n}{gs1}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{)} \PY{c+c1}{\PYZsh{} set the spacing between axes.}
+             \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{grayscale} \PY{o}{==} \PY{k+kc}{False} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{img\PYZus{}nr} \PY{o}{=} \PY{l+m+mi}{0} 
+             
+             \PY{k}{for} \PY{n}{rowi} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{)}\PY{p}{:}         
+                   \PY{k}{for} \PY{n}{colj} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}cols}\PY{p}{)}\PY{p}{:} 
+                     \PY{n}{Wis} \PY{o}{=} \PY{n}{Ws}\PY{p}{[}\PY{n}{img\PYZus{}nr}\PY{p}{]}
+                     \PY{n}{beta\PYZus{}w\PYZus{}id} \PY{o}{=} \PY{n}{img\PYZus{}nr} \PY{o}{/}\PY{o}{/} \PY{n}{nr\PYZus{}rows}
+                     \PY{n}{beta\PYZus{}h\PYZus{}id} \PY{o}{=} \PY{n}{img\PYZus{}nr} \PY{o}{\PYZpc{}} \PY{n}{nr\PYZus{}rows}
+                     \PY{n}{img} \PY{o}{=} \PY{n}{transfer\PYZus{}W}\PY{p}{(}\PY{n}{Wis}\PY{p}{)}
+                 
+                     \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs1}\PY{p}{[}\PY{n}{rowi}\PY{p}{,} \PY{n}{colj}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}  
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{beta\PYZus{}w}\PY{p}{[}\PY{n}{beta\PYZus{}w\PYZus{}id}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beta\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{beta\PYZus{}h}\PY{p}{[}\PY{n}{beta\PYZus{}h\PYZus{}id}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+                 
+                     \PY{n}{img\PYZus{}nr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{titlestr}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}       
+         
+         \PY{n}{plot\PYZus{}Ws}\PY{p}{(}\PY{n}{Ws\PYZus{}betas}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{titlestr}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plot W for different beta\PYZus{}w, beta\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}   
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{Q2.2. plot the convergence graph(error measured by
+Euclidean
+distance)}\label{q2.2.-plot-the-convergence-grapherror-measured-by-euclidean-distance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  \PY{c+c1}{\PYZsh{} up to 12 different line/color style combinations}
+         \PY{n}{linestyles} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{]}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}covergence}\PY{p}{(}\PY{n}{Diffs}\PY{p}{,} \PY{n}{titlestr}\PY{p}{)}\PY{p}{:} 
+             
+             \PY{n}{nr\PYZus{}cases} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Diffs}\PY{p}{)}   
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}    
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+                 \PY{n}{Diffi} \PY{o}{=} \PY{n}{Diffs}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Diffi}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Diffi}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=} \PY{n}{colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{n}{linestyles}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{titlestr}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}      
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{plot\PYZus{}covergence}\PY{p}{(}\PY{n}{Diffs\PYZus{}betas}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Convergence Plot for different betas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{Q 2.2 Comment on the parameter
+beta}\label{q-2.2-comment-on-the-parameter-beta}
+
+As shown from the printed Final errors for different cases, and also the
+generated Ws for different cases. The beta only plays a role in the
+initialization stage, however with the iterations going on, the effect
+of differnt betas becomes almost non-distinguishable. We could conclude
+that we do not observe significant difference caused by the beta value.
+
+    \paragraph{Question 2.3: different alpha for w and
+h}\label{question-2.3-different-alpha-for-w-and-h}
+
+    \subparagraph{Q 2.3 set the parameters for different
+alphas}\label{q-2.3-set-the-parameters-for-different-alphas}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} set the parameters for different alphas}
+         \PY{n}{nr\PYZus{}cases} \PY{o}{=} \PY{l+m+mi}{9}
+         \PY{n}{paras} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{alpha\PYZus{}w} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.7}\PY{p}{]}
+         \PY{n}{alpha\PYZus{}h} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.7}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{para\PYZus{}wh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} beta\PYZus{}w = 1 }
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} beta\PYZus{}h = 1}
+             \PY{n}{alpha\PYZus{}w\PYZus{}id} \PY{o}{=} \PY{n}{i} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{3}
+             \PY{n}{alpha\PYZus{}h\PYZus{}id} \PY{o}{=} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3}
+             
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{alpha\PYZus{}w}\PY{p}{[}\PY{n}{alpha\PYZus{}w\PYZus{}id}\PY{p}{]}
+             \PY{n}{para\PYZus{}wh}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{alpha\PYZus{}h}\PY{p}{[}\PY{n}{alpha\PYZus{}h\PYZus{}id}\PY{p}{]} 
+             
+             \PY{n}{paras}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{para\PYZus{}wh}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{Q 2.3 run the model for different
+alphas}\label{q-2.3-run-the-model-for-different-alphas}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} run the model for different alphas}
+         \PY{n}{Diffs\PYZus{}alphas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Ws\PYZus{}alphas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Hs\PYZus{}alphas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{nr\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{150}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{para\PYZus{}whi} \PY{o}{=} \PY{n}{paras}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H} \PY{o}{=} \PY{n}{EM}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{,} \PY{n}{K}\PY{p}{,} \PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+             
+             \PY{n}{Diffs\PYZus{}alphas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Diffs}\PY{p}{)}
+             \PY{n}{ErrInfStr} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, beta\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}
+                 \PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, alpha\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, beta\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{para\PYZus{}whi}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Case }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{ErrInfStr} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,  Final Error: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{Diffs}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Ws\PYZus{}alphas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{W}\PY{p}{)}
+             \PY{n}{Hs\PYZus{}alphas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{H}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Case 1: alpha\_w = 0.3, beta\_w = 1.0, alpha\_h = 0.3, beta\_h = 1.0,  Final Error: 52273.54
+Case 2: alpha\_w = 0.3, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 52614.83
+Case 3: alpha\_w = 0.3, beta\_w = 1.0, alpha\_h = 1.7, beta\_h = 1.0,  Final Error: 53779.29
+Case 4: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 0.3, beta\_h = 1.0,  Final Error: 49870.2
+Case 5: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 46634.37
+Case 6: alpha\_w = 1.0, beta\_w = 1.0, alpha\_h = 1.7, beta\_h = 1.0,  Final Error: 47051.69
+Case 7: alpha\_w = 1.7, beta\_w = 1.0, alpha\_h = 0.3, beta\_h = 1.0,  Final Error: 50875.94
+Case 8: alpha\_w = 1.7, beta\_w = 1.0, alpha\_h = 1.0, beta\_h = 1.0,  Final Error: 46957.78
+Case 9: alpha\_w = 1.7, beta\_w = 1.0, alpha\_h = 1.7, beta\_h = 1.0,  Final Error: 46019.06
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}Ws\PYZus{}alphas}\PY{p}{(}\PY{n}{Ws}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{n}{titlestr}\PY{p}{,} \PY{n}{grayscale}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:} 
+             \PY{c+c1}{\PYZsh{} plot the Ws generated from different parameters }
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}    
+             \PY{n}{gs1} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{)}
+             \PY{n}{gs1}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{)} \PY{c+c1}{\PYZsh{} set the spacing between axes.}
+             \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{grayscale} \PY{o}{==} \PY{k+kc}{False} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}
+             
+             \PY{n}{img\PYZus{}nr} \PY{o}{=} \PY{l+m+mi}{0} 
+             
+             \PY{k}{for} \PY{n}{rowi} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{)}\PY{p}{:}         
+                   \PY{k}{for} \PY{n}{colj} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}cols}\PY{p}{)}\PY{p}{:} 
+                     \PY{n}{Wis} \PY{o}{=} \PY{n}{Ws}\PY{p}{[}\PY{n}{img\PYZus{}nr}\PY{p}{]}
+                     
+                     \PY{n}{alpha\PYZus{}w\PYZus{}id} \PY{o}{=} \PY{n}{img\PYZus{}nr} \PY{o}{/}\PY{o}{/} \PY{n}{nr\PYZus{}rows}
+                     \PY{n}{alpha\PYZus{}h\PYZus{}id} \PY{o}{=} \PY{n}{img\PYZus{}nr} \PY{o}{\PYZpc{}} \PY{n}{nr\PYZus{}rows}
+                     
+                     \PY{n}{img} \PY{o}{=} \PY{n}{transfer\PYZus{}W}\PY{p}{(}\PY{n}{Wis}\PY{p}{)}
+                 
+                     \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs1}\PY{p}{[}\PY{n}{rowi}\PY{p}{,} \PY{n}{colj}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}  
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha\PYZus{}w = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{alpha\PYZus{}w}\PY{p}{[}\PY{n}{alpha\PYZus{}w\PYZus{}id}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha\PYZus{}h = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{alpha\PYZus{}h}\PY{p}{[}\PY{n}{alpha\PYZus{}h\PYZus{}id}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+                 
+                     \PY{n}{img\PYZus{}nr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{titlestr}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}       
+         
+         \PY{n}{plot\PYZus{}Ws\PYZus{}alphas}\PY{p}{(}\PY{n}{Ws\PYZus{}alphas}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                        \PY{n}{titlestr}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plot W for different alpha\PYZus{}w, alpha\PYZus{}h, with beta\PYZus{}w = beta\PYZus{}h = 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{plot\PYZus{}covergence}\PY{p}{(}\PY{n}{Diffs\PYZus{}alphas}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Covergence plot for different alphas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Comment on different
+alphas}\label{comment-on-different-alphas}
+
+    We could clearly see that when alpha is small(either alpha\_w or
+alpha\_h or both, especially when alpha\_w is small), we will not get a
+good result. This matches with the theory background. Because when alpha
+is small, most of the values from Gamma distribution will be close to
+zero and only a few parameters will dominate. The lead to a sparse
+representation of the original matrix \(V\). I.e, we lost some
+information on the initialization phase.
+
+And as we could see from the printed final error for different cases, we
+could see that when alpha value increases, the final error reduces.
+Among all the nine cases, the Case 9: (alpha\_w = 1.7, beta\_w = 1.0,
+alpha\_h = 1.7, beta\_h = 1.0) has the best performance and the largest
+alphas.
+
+    \paragraph{Question 2.4: different K with alpha\_w = alpha\_h = beta\_w
+= beta\_h =
+1}\label{question-2.4-different-k-with-alpha_w-alpha_h-beta_w-beta_h-1}
+
+    \subparagraph{Q 2.4 initilize the parameters for different
+Ks}\label{q-2.4-initilize-the-parameters-for-different-ks}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} initilize the parameters}
+         \PY{n}{Ks} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4} \PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{6}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{7}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{]} \PY{c+c1}{\PYZsh{} for display convinenece, K is take to be n ** 2, n = 2, 3, ...}
+         \PY{n}{nr\PYZus{}cases} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Ks}\PY{p}{)}
+         
+         \PY{n}{para\PYZus{}wh} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{Diffs\PYZus{}Ks} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Ws\PYZus{}Ks} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{Hs\PYZus{}Ks} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         
+         \PY{n}{nr\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{150}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nr\PYZus{}cases}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{Diffs}\PY{p}{,} \PY{n}{W}\PY{p}{,} \PY{n}{H} \PY{o}{=} \PY{n}{EM}\PY{p}{(}\PY{n}{para\PYZus{}wh}\PY{p}{,} \PY{n}{Ks}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{nr\PYZus{}iter}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+             
+             \PY{n}{Diffs\PYZus{}Ks}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Diffs}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Case }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ with K = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Ks}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,  Final Error: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{Diffs}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Ws\PYZus{}Ks}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{W}\PY{p}{)}
+             \PY{n}{Hs\PYZus{}Ks}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{H}\PY{p}{)}
+             
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Case 1:  with K = 4,  Final Error: 62249.54
+Case 2:  with K = 9,  Final Error: 54392.44
+Case 3:  with K = 16,  Final Error: 49546.09
+Case 4:  with K = 25,  Final Error: 46592.13
+Case 5:  with K = 36,  Final Error: 44111.5
+Case 6:  with K = 49,  Final Error: 42183.73
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}Ws\PYZus{}Ks}\PY{p}{(}\PY{n}{Ws}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{,} \PY{n}{titlestr}\PY{p}{,} \PY{n}{grayscale}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:} 
+             \PY{c+c1}{\PYZsh{} plot the Ws generated from different parameters }
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}    
+             \PY{n}{gs1} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{p}{)}
+             \PY{n}{gs1}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{)} \PY{c+c1}{\PYZsh{} set the spacing between axes.}
+             \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{grayscale} \PY{o}{==} \PY{k+kc}{False} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}
+             
+             \PY{n}{img\PYZus{}nr} \PY{o}{=} \PY{l+m+mi}{0} 
+             
+             \PY{k}{for} \PY{n}{rowi} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}rows}\PY{p}{)}\PY{p}{:}         
+                   \PY{k}{for} \PY{n}{colj} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nr\PYZus{}cols}\PY{p}{)}\PY{p}{:} 
+                     \PY{n}{Wis} \PY{o}{=} \PY{n}{Ws}\PY{p}{[}\PY{n}{img\PYZus{}nr}\PY{p}{]}
+                     \PY{n}{Ki} \PY{o}{=} \PY{n}{Ks}\PY{p}{[}\PY{n}{img\PYZus{}nr}\PY{p}{]}
+                     
+                     \PY{n}{img} \PY{o}{=} \PY{n}{transfer\PYZus{}W}\PY{p}{(}\PY{n}{Wis}\PY{p}{)}
+                 
+                     \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs1}\PY{p}{[}\PY{n}{rowi}\PY{p}{,} \PY{n}{colj}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}  
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{img\PYZus{}nr} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{: with K =}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Ki}\PY{p}{)} \PY{p}{)}
+                     \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+                 
+                     \PY{n}{img\PYZus{}nr} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{titlestr}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}       
+         
+         \PY{n}{plot\PYZus{}Ws\PYZus{}Ks}\PY{p}{(}\PY{n}{Ws\PYZus{}Ks}\PY{p}{,} \PY{n}{nr\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{nr\PYZus{}cols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+                        \PY{n}{titlestr}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plot W for different K values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{plot\PYZus{}covergence}\PY{p}{(}\PY{n}{Diffs\PYZus{}Ks}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Covergence Plot for different Ks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_67_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Comment on different Ks}\label{comment-on-different-ks}
+
+    We could see that with high K values, the error becomes much smaller,
+and more information is preserved by the W. But the difference is not
+that significant, which means the most distinguishable features of the
+face only exist in a small part of the face, that is saying when K is
+large enough, increasing K will no longer reduce the approximation error
+as fast as when K is small.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
